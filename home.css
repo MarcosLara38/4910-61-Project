@@ -1,0 +1,17 @@
+body{
+    
+}
+img{
+    width: 80%; /* width of container */
+    height: 80%; /* height of container */
+    align-self: center;
+    /*object-fit: cover;
+    border: 5px solid black;*/
+    
+}
+
+ul #nav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
