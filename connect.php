@@ -1,5 +1,5 @@
 <?php
     //look this up again
-    session_start();
+    echo "inside connect.php";
 
 ?>
