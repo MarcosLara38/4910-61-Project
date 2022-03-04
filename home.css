@@ -1,5 +1,6 @@
 body{
-    
+    text-align: center;
+    background-color: #d93434;
 }
 img{
     width: 80%; /* width of container */
@@ -15,3 +16,4 @@ ul #nav{
     margin: 0;
     padding: 0;
 }
+

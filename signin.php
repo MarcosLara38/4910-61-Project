@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     </head>
-<body>
+<body style= text-align:center>
     
 <?php if(!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == false){ ?>
 <form method="POST" id="signin">

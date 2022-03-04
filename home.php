@@ -13,7 +13,7 @@
         require "nav.php";
     ?>
 
-    <img src="pics/banner.png">   
+    <img src="pics/changing.png">   
     <h1>This is a heading for the home page</h1>
     <div>
         <div>
