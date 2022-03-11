@@ -1,7 +1,6 @@
 <?php
-    #require "connect.php";
-    require "nav.php";
-    define("STYLESHEET", "home.css");
+    require_once "connect.php";
+  
 
 
 //$nameErr = $emailErr = $genderErr = $websiteErr = "";
@@ -72,21 +71,20 @@ if (isset($_POST['submit'])){
     }
 
     
-    if($namevalid && $lnamevalid && $emailvalid && 
-        $pwordvalid && $confirmpwordvalid && $validpassword){
-            Echo "All entries are valid. Ready to enter info into database";
+    if($validpassword) {
+            Echo "All entries are valid. Ready to enter info into database<br>";
 
-            $stmt = $conn->prepare("INSERT INTO users(fname, lname, email, password) VALUES(?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $fname, $lname, $email,  $pword);
+            $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (?, ?, ?, ?)");
+            
+            $stmt->bind_param("ssss", $fname, $lname, $email, $pword);
         if ($stmt->execute()) {
-            var_dump($stmt);
+            
             $_SESSION['logged_in'] = true;
             $_SESSION['name'] = $fname;
             header("Location: home.php");
         } else {
             var_dump($conn->error);
-
-
+            var_dump($stmt);
         }
     }
         
@@ -143,15 +141,17 @@ function cleaninput($data){
   <title>Sign up</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-  <link href="<?php echo STYLESHEET ?>" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="home.css">
 
 </head>
-<body id='signupbody'>
-
-
+<body>
+  <?php require "nav.php"; ?>
+  <div>
+    <img src="pics/logo.png"> 
+  </div>
 <?php if(!$validpassword) { ?>
 <form method="POST" id='signup'>
-<img src="pics/logo.png"> 
+
 <p id='welcomesignup'>You're almost there, Just need some information about you first!</p>
     <label for="fname">First Name:</label>
     <input type="text" id="fname" name="fname" placeholder="" <?php if(!$fnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$fname' ";} ?> > <?php echo $nameerr; ?> <br>
@@ -165,7 +165,7 @@ function cleaninput($data){
     <input type="password" id="confirmpword" name="confirmpword" placehorlder="" <?php if(!$confirmpwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $confirmpworderr;?><br>
     <input type="submit" value="submit" name="submit">
 </form>
-<?php }else echo "Thank you $fname, you will be entered in our database. " ?>
+<?php }else echo "Thank you $fname, you will be entered in our database. "?>
 
 </body>
 </html>

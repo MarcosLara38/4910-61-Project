@@ -14,7 +14,7 @@
     <div class = "nav">
     <?php
         //uncomment when finished setting up connect.php database side
-        require "connect.php";
+        require_once "connect.php";
         require "nav.php";
         if (isset($_POST) && !empty($_POST)) {
             $email = htmlspecialchars($_POST['email']);
@@ -22,16 +22,14 @@
             //$hashed = password_hash($password, PASSWORD_DEFAULT);
             
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
-            $stmt->bind_param("ss", $username, $password);
+            $stmt->bind_param("ss", $email, $password);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 $data = $result->fetch_assoc();
-                if (password_verify($data['password'], $password)) {
-                    $_SESSION['logged_in'] = true;
-                    $_SESSION['name'] = $data['fname'];
-                    header("Location: home.php");
-                }
+                $_SESSION['logged_in'] = true;
+                $_SESSION['name'] = $data['fname'];
+                header("Location: home.php");
             }
             $result->free();
         }

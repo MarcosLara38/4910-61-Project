@@ -1,17 +1,10 @@
 <?php
-    //require "nav.php";
-    //If you are logged this will sign you out 
-    //and redirect you to home
-    if($_SESSION['logged_in']){
-        session_unset();
-        session_destory();
-        header("Location: home.php");
-    }
-    //If you are not logged in and you somehow still enter this page
-    //you will be automatically redirected to home. 
-    else{
-        header("Location: home.php");
-    }
-
-
+require_once "connect.php";
+if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == false) {
+    header("Location: signin.php");
+}
+session_unset();
+session_destroy();
+header("Location: home.php");
+$conn->close();
 ?>

@@ -11,13 +11,20 @@
 <body>
     <div class = "nav">
     <?php 
-        
+        require_once "connect.php";
         require "nav.php";
     ?>
     </div>
 
-    <img src="pics/logo.png">   
-    <h1></h1>
+    <img src="pics/logo.png"><br><br><br>  
+    <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
+			<h1>Welcome, Guest</h1>
+			
+		<?php else: 
+			print <<<HTML
+			<h1>Welcome, {$_SESSION['name']}!</h1>
+HTML;
+			endif; ?>
     <div>
         <div class = "body">
             <ul id = "list">
