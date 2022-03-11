@@ -151,6 +151,7 @@ function cleaninput($data){
 
 <?php if(!$validpassword) { ?>
 <form method="POST" id='signup'>
+<img src="pics/logo.png"> 
 <p id='welcomesignup'>You're almost there, Just need some information about you first!</p>
     <label for="fname">First Name:</label>
     <input type="text" id="fname" name="fname" placeholder="" <?php if(!$fnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$fname' ";} ?> > <?php echo $nameerr; ?> <br>
