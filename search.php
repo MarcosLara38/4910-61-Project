@@ -23,9 +23,9 @@
 
             </ul>
 
-            <div>
-                <input type = "text" id = "input" placeholder="Search recipe...">
-                <button type = "button" id = "button" onclick="addingredient()">Search Recipe</button>
+            <div class = "searchdiv">
+                <input type = "text" class = "searchinput" placeholder="Search recipe...">
+                <button type = "button" class = "searchbtn" onclick="addingredient()">Search Recipe</button>
             </div>
 
 
