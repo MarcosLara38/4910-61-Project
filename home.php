@@ -6,25 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="home.css">
     <script src="final.js"></script>
-    <title>Document</title>
+    <title>Foodify</title>
 </head>
 <body>
-    <?php
+    <div class = "nav">
+    <?php 
+        
         require "nav.php";
     ?>
+    </div>
 
-    <img src="pics/changing.png">   
-    <h1>This is a heading for the home page</h1>
+    <img src="pics/logo.png">   
+    <h1></h1>
     <div>
-        <div>
+        <div class = "body">
             <ul id = "list">
 
             </ul>
 
             <div class = "additem">
-                <input type = "text" id = "input" placeholder="Add ingredient...">
-                <button type = "button" id = "button" onclick="addingredient()">Add ingredient</button>
-                <button type = "button" id = "clear" onclick = "clearlist()">Clear ingredient list</button>
+                <input class="addingi" type = "text" placeholder="Add ingredient...">
+                
+                <button type = "button" class = "addbtn" onclick="addingredient()">Add ingredient</button>
+                <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
+                
             </div>
 
 

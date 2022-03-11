@@ -1,12 +1,3 @@
-<?php
-    //uncomment when finished setting up connect.php database side
-    //require "connect.php";
-
-    require "nav.php";
-
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +8,19 @@
     <title>Sign in</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    </head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+
 <body style= text-align:center>
-    
+    <div class = "nav">
+    <?php
+        //uncomment when finished setting up connect.php database side
+        //require "connect.php";
+        require "nav.php";
+    ?>
+    </div>
 <?php if(!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == false){ ?>
 <form method="POST" id="signin">
-    <p>Welcome to the Sign In/Sign Up page</p>
+    <h2>Welcome to the Sign In/Sign Up page</h2>
     Username: <input type="text" name = "username"/>
     <br>
     Password: <input type = "password" name = "password"/>
