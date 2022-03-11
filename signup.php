@@ -148,7 +148,7 @@ function cleaninput($data){
 </head>
 <body id='signupbody'>
 
-  <p> </p>
+
 <?php if(!$validpassword) { ?>
 <form method="POST" id='signup'>
 <p id='welcomesignup'>You're almost there, Just need some information about you first!</p>

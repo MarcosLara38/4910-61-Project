@@ -130,3 +130,41 @@ input.searchinput{
  .searchbtn:hover{
     box-shadow: inset 300px 0 0 0 #f37f70;
 }
+
+#signin{
+    color: #ffffff;
+    font-size: 16px;
+    transition: .5s;
+    margin-top: 10px;
+    background: #cc3333;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    border-radius: 10px;
+    text-align: center; 
+    padding: 30px; 
+    ; 
+}
+
+#signup{
+    color: #ffffff;
+    font-size: 16px;
+    transition: .5s;
+    margin-top: 10px;
+    background: #cc3333;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    border-radius: 10px;
+    text-align: center; 
+    padding: 30px;
+    margin-top: 50px
+}
+
+
+
+
+
+
+.signin_btn{
+    color: black;
+}
+

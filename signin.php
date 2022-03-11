@@ -18,16 +18,19 @@
         require "nav.php";
     ?>
     </div>
+    <img src="pics/logo.png">  
 <?php if(!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == false){ ?>
-<form method="POST" id="signin">
+    <div class="containerin">
+    <form method="POST" id="signin">
     <h2>Welcome to the Sign In/Sign Up page</h2>
-    Username: <input type="text" name = "username"/>
+    Email: <input class = "signin_email" type="text" name = "email"/>
     <br>
-    Password: <input type = "password" name = "password"/>
+    Password: <input class = "signin_pass" type = "password" name = "password"/>
     <br>
-    <input type = "submit" value="login"/>
+    <input class = "signin_btn" type = "submit" value="login"/>
     <p>Don't have an account? <a id='signinbtn' href="signup.php">Sign up</p>
-</form>
+    </form>
+    </div>
 <?php } else{ ?>
     <h1>You are logged in</h1>
 <?php } ?>
