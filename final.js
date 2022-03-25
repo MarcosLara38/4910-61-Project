@@ -9,16 +9,20 @@ function addingredient(){
     if(input != ""){
         var text = document.createTextNode(input);
         var newitem = document.createElement("li");
-        var newcheck = document.createElement("input");
-        newcheck.type = "checkbox";
-        newcheck.id = "useritem" + itemcounter.toString();
+        var newcheck = document.createElement("button"); //was originally input
+        //newcheck.type = "checkbox"
+        newcheck.type = "button"; //added
+        //creating id for each new item added (ing1,ing2)
+        //newcheck.id = "ing" + itemcounter.toString();
+        newcheck.id = "ing"; // added
+        newcheck.appendChild(document.createTextNode('Delete'));
         itemcounter++;
 
         var newlabel = document.createElement("label");
         newlabel.setAttribute("for",newcheck.id);
         newlabel.innerHTML = input;
 
-        newcheck.onclick = function(){
+        /*newcheck.onclick = function(){
             if(newcheck.checked){
                 newlabel.innerHTML = "<del>" + input + "</del>";
             
@@ -27,12 +31,19 @@ function addingredient(){
                 newlabel.innerHTML = input;
             }
         };
+        */
 
         //add the a checkmark next to the new item and apply the label
         newitem.append(newcheck);
         newitem.append(newlabel);
         document.getElementById("list").appendChild(newitem);
-        document.getElementById("addingi").value = "";    
+        document.getElementById("addingi").value = ""; 
+        
+        //button next to list item is pressed
+        document.getElementById('ing').onclick = function(){
+            console.log("button was now clicked");
+        }
+        
     }
     //if input is empty then let them know 
     else{

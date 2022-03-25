@@ -161,10 +161,18 @@ input.searchinput{
 
 
 
-
-
-
 .signin_btn{
     color: black;
 }
 
+#ing{
+    padding: 2px 8px;
+    margin-right: 4px;
+    color: white;
+    background-color: rgb(209, 44, 44);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 0 #f37f70;
+    transition: ease-out 0.3s;
+    font-size: 0.7rem;
+    outline: none;
+}
