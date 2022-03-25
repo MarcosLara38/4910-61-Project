@@ -11,7 +11,9 @@
 <body>
     <div class = "nav">
     <?php 
+        require "connect.php";
         require "nav.php";
+        
     ?>
     </div>
 

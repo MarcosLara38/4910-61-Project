@@ -32,7 +32,7 @@ HTML;
             </ul>
 
             <div class = "additem">
-                <input class="addingi" type = "text" placeholder="Add ingredient...">
+                <input id ="addingi" type = "text" placeholder="Add ingredient...">
                 <button type = "button" class = "addbtn" onclick="addingredient()">Add ingredient</button>
                 <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
                 

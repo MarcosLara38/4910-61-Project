@@ -3,7 +3,7 @@ const list = document.getElementById("list");
 var itemcounter = 0;
 
 function addingredient(){
-    var input = document.getElementById("input").value; 
+    var input = document.getElementById("addingi").value; 
     //alert(input);
 
     if(input != ""){
@@ -32,7 +32,7 @@ function addingredient(){
         newitem.append(newcheck);
         newitem.append(newlabel);
         document.getElementById("list").appendChild(newitem);
-        document.getElementById("input").value = "";    
+        document.getElementById("addingi").value = "";    
     }
     //if input is empty then let them know 
     else{
@@ -40,10 +40,11 @@ function addingredient(){
         alert("empty input");
     }
 
-    //clear ingredient list 
+}
+
+//clear ingredient list 
     function clearlist(){
-        var ingrdientlist = document.getElementById("list");
+        //alert("entered clear list function");
+        var ingredientlist = document.getElementById("list");
         ingredientlist.innerHTML = "";
     }
-
-}
