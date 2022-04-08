@@ -19,6 +19,9 @@
         <li>
             <a href = "signout.php">Sign Out</a>
         </li>
+        <li>
+            <a href = "addData.php">Add To Database(Admin)</a>
+        </li>
     <?php } else{ ?>
         <!--If not signed in show these options --> 
         <li>

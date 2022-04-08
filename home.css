@@ -163,6 +163,7 @@ input.searchinput{
 
 .signin_btn{
     color: black;
+    padding: 10px;
 }
 
 #ing{
@@ -176,3 +177,4 @@ input.searchinput{
     font-size: 0.7rem;
     outline: none;
 }
+
