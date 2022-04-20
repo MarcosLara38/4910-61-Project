@@ -17,7 +17,7 @@
             $recipe_name =cleaninput($_POST['recipe_name']);
         }
 
-        //Change to radio between: Breakfast, Lunch, dinner. Maybe 2 categories
+        //Change to radio between: Breakfeast, Lunch, dinner. Maybe 2 categories
         if(empty($_POST['category'])){
             $cat_valid = false;
             $cat_err = "Food category is required";
@@ -123,23 +123,32 @@ HTML;
             <div class="adddata">
                 <form method="POST" id="signin">
                 <h2>Entering Data in Database</h2>
-                <label for = "recipe_name">Recipe Name</name>
+                <label class="rname" for = "recipe_name">Recipe Name</name>
                 <input class = "recipe_name" type="text" name = "recipe_name"/>
                 <br>
+                
+                <input type = "checkbox" name = "cat_checkbox" value = "breakfeast">
+                <label for = "breakfeast">Breakfeast</label>
+                <input type = "checkbox" name = "cat_checkbox" value = "lunch">
+                <label for = "lunch">lunch</label>
+                <input type = "checkbox" name = "cat_checkbox" value = "dinner">
+                <label for = "dinner">Dinner</label>
 
-                <label for = "category">Category:Breakfeast?Lunch?Dinner? OR 2?</label>
+                <!--<label class = "cat_label" for = "category">Category:Breakfeast?Lunch?Dinner? OR 2?</label>
                 <input class = "category" type = "text" name = "category"/>
-                <br>
+                --><br>
 
-                <label for = "cook_time">Cook Time: </label>
+                <label class = "ctime_label" for = "cook_time">Cook Time: </label>
                 <input class = "cook_time" type="text" name = "cook_time"/>
                 <br>
 
                 <!--<label for = "vegan">Is it vegan? Yes/No: </label>
                 <input class = "vegan" type = "text" name = "vegan"/> -->
+                <div class = "radio">
                 <label for="vegan">Is the recipe Vegan?</label>
-                <input type="radio" name = "vegan_boolean" value="yes">Yes
-                <input type="radio" name = "vegam_boolean" value="no" >No
+                <input class = "yes_rad" type="radio" name = "vegan_boolean" value="yes">Yes
+                <input class = "no_rad" type="radio" name = "vegan_boolean" value="no" >No
+                </div>
                 <br>
 
                 <label for = "serving_size">Serving Size:How many will it feed?: </label>
@@ -154,7 +163,7 @@ HTML;
                 <input class = "ingredients" type="text" name = "ingredients"/>
                 <br>
 
-                <input class = "" type = "submit" value="Add to Database"/>
+                <input class = "add_submit" type = "submit" value="Add to Database"/>
                 </form>
             </div>
 

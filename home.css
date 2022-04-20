@@ -178,3 +178,33 @@ input.searchinput{
     outline: none;
 }
 
+
+/* Css for input boxes in adding to database */
+.rname{
+    padding: 0px;
+}
+.category{
+    margin-right: 198px;
+}
+.cook_time{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.radio{
+    margin-right: 100px;
+}
+.serving_size{
+    margin-right: 150px;
+}
+.add_notes{
+    margin-right: 25px;
+}
+.ingredients{
+    margin-left: 10px;
+}
+.add_submit{
+    margin-left: 60px;
+}
+input{
+    margin-top: 10px;
+}
