@@ -72,7 +72,7 @@
             $servingsizedrop_err = "Need to have serving size please";
             $servesizedrop_valid = false;
         }else{
-            echo $servesizedrop = $_POST['servingsizedrop'];
+            $drop_value = $_POST['servingsizedrop'];
         }
 
    
@@ -247,9 +247,7 @@ HTML;
                 <?php echo $servsize_err; ?>
                 <br>
 
-                <?php
-                    $drop_value = $_POST['servingsizedrop'] 
-                ?>
+                
                 <!-- Serving Size drop down testing -->
                 <?php echo "$servingsizedrop_err" ?>
                 <label for="servingsizedrop" <?php if(!$servesizedrop_valid){ echo " style = 'border: 4px solid black'";}?>>How many will it feed?</label>
