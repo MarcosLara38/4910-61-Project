@@ -281,7 +281,9 @@ HTML;
                         <p <?php if(!$addingredients_valid){ echo " style = 'color:Black'";} ?>> <?php echo $ing_error; ?> </p>
                         <label for = "ingredients">Ingredients: </label>
                         <input id ="addDataInput" type = "text" name = "ingredients" placeholder="2 eggs">
-                        <button type = "button" class = "addDatabtn" onclick = "addDataIng();" >Add ingredient</button>
+                        <button type = "button" class = "addDatabtn" onclick = "addDataIng();" >Add ingredient</button><br>
+                        <label for = "Quanty">Qty: </label>
+                        <input id ="addQtyInput" type = "text" name = "qty" placeholder="quantity">
                         
                         <!--<button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
                         <button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
