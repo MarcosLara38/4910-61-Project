@@ -54,7 +54,7 @@
         # Cook time setting variable and boolean if isset/not empty 
         if(($_POST['cooktimedrop']) == 0){
             $cooktimedrop_valid = false;
-            $cooktimedrop_err = "Need to have serving size please";
+            $cooktimedrop_err = "Need to have cook time ";
         }else{
             $cookTimeDropValue = $_POST['cooktimedrop'];
         }
@@ -81,17 +81,19 @@
         }
 
         if(!$_POST['ingredients']){
-            echo "no ingredient given <br> ";
+            $ing_error = "no ingredient given <br> ";
+            $addingredients_valid = false;
         }else{
             $ingredients = implode(', ', $_POST['ingredients']);
-            echo "Ingredients given were: $ingredients <br>";
+            $ingredients_list = "Ingredients given were: $ingredients <br>";
         }
 
         if(!$_POST['steps']){
-            echo "no steps given <br> ";
+            $steps_error = "no steps given <br> ";
+            $addsteps_valid = false;
         }else{
             $steps = implode(', ', $_POST['steps']);
-            echo "steps given for recipe were: $steps <br>";
+            $steps_list = "steps given for recipe were: $steps <br>";
         }
 
     }
@@ -106,10 +108,7 @@
     }
 
 
-    
-    //escape user inputs for security
-    //$recipe_name = mysqli_real_escape_string($link,$_REQUEST['recipe_name']);
-    //testing 
+
 /*    
     echo "Recipe Name: $recipe_name<br>";
     echo "Category of food: $selected<br>";
@@ -189,14 +188,14 @@ HTML;
 
             <div class="adddata">
                 <form method="POST" id="signin" >
-                <h1>Entering Recipes!</h1>
+                <h1>Lets Enter Recipes!</h1>
 
                 <!-- Recipe Name Field -->
+                <p <?php if(!$recname_valid){ echo " style = 'color:Black'";} ?>> <?php echo $recname_err; ?> </p>
                 <label class="rname" for = "recipe_name">Recipe Name</name>
                 <input class = "recipe_name" type="text" name = "recipe_name" placeholder = "Texas Style Eggs" 
                 <?php if(!$recname_valid){ echo " style = 'border: 4px solid black'";} 
                 else{ echo "value = '$recipe_name' ";} ?> > 
-                <?php echo $recname_err; ?>
                 
             
 
@@ -221,8 +220,8 @@ HTML;
                 <br>
 
                 <!-- Cooktime drop down testing -->
-                <?php echo "$cooktimedrop_err" ?>
-                <label for="cooktimedrop" <?php if(!$cooktimedrop_valid){ echo " style = 'border: 4px solid black'";}?>>How long does it take to make?</label>
+                <p <?php if(!$cooktimedrop_valid){ echo " style = 'color:Black'";} ?>> <?php echo "$cooktimedrop_err<br>" ?> </p>
+                <label for="cooktimedrop"> How long does it take to make?</label>
                 <select name ="cooktimedrop" id ="cookdropdown" required>
                     <option value = "0"> 0 </option>
                     <option <?php if ($cookTimeDropValue == '1') { ?>selected="true" <?php }; ?>value= "1">  Less Than 15Mins </option> 
@@ -239,8 +238,8 @@ HTML;
 
                 
                 <!-- Serving Size drop down testing -->
-                <?php echo "$servingsizedrop_err" ?>
-                <label for="servingsizedrop" <?php if(!$servesizedrop_valid){ echo " style = 'border: 4px solid black'";}?>>How many will it feed?</label>
+                <p <?php if(!$servesizedrop_valid){ echo " style = 'color:Black'";} ?>> <?php echo "$servingsizedrop_err<br>" ?> </p>
+                <label for="servingsizedrop" <?php if(!$servesizedrop_valid){ echo " style = 'border: 1px solid black'";}?>>How many will it feed?</label>
                 <select name ="servingsizedrop" id ="servingdropdown" required>
                     <option value = "0"> 0 </option>
                     <option <?php if ($drop_value == '1') { ?>selected="true" <?php }; ?>value= "1"> 1 </option> 
@@ -253,11 +252,11 @@ HTML;
                     <option <?php if ($drop_value == '8') { ?>selected="true" <?php }; ?>value= "8"> 8 </option> 
                 <select>
                 <br><br>
-                    
 
 
 
                 <!-- Vegan? Radio Field -->
+                <p <?php if(!$veganboolradio_valid){ echo " style = 'color:Black'";} ?>> <?php echo $veganboolradio_err; ?> </p>
                 <div class = "radio">
                 <label for="vegan">Is the recipe Vegan?</label>
                 <label> Yes </label>
@@ -266,7 +265,6 @@ HTML;
                 <label> No </label>
                 <input class = "no_rad" type="radio" name = "vegan_boolean" value="no" 
                 <?php if (isset($_POST['vegan_boolean']) && $_POST['vegan_boolean'] == 'no') echo "checked = 'checked'"; ?>>
-                <p <?php if(!$veganboolradio_valid){ echo " style = 'color:Black'";} ?>> <?php echo $veganboolradio_err; ?> </p>
                 </div>
                 <br>
 
@@ -278,9 +276,11 @@ HTML;
                     <div class = "addIngredient">
                         <p> Syntax = Amount ingredient</p>
                         <p> Example = 3 cups of Milk </p>
+                        <p <?php if(!$addingredients_valid){ echo " style = 'color:Black'";} ?>> <?php echo $ing_error; ?> </p>
                         <label for = "ingredients">Ingredients: </label>
                         <input id ="addDataInput" type = "text" name = "ingredients" placeholder="2 eggs">
                         <button type = "button" class = "addDatabtn" onclick = "addDataIng();" >Add ingredient</button>
+                        
                         <!--<button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
                         <button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
 
@@ -289,12 +289,16 @@ HTML;
                             
                             </ul>
                         </div>
+
+                        <?php echo $ingredients_list ?>
+
                     </div>
                 <br>
 
                 <!-- Adding Steps to Cook Field(many) -->
                 <div class = "addStep">
 
+                        <p <?php if(!$addsteps_valid){ echo " style = 'color:Black'";} ?>> <?php echo $steps_error; ?> </p>
                         <label for = "add_steps">Steps:  </label>
                         <input id = "addSteps" type = "text" name = "add_steps" placeholder = "Add Salt to Eggs">
                         <button type = "button" class = "addStepbtn" onclick = "addStep();" >Add Step</button>
@@ -304,6 +308,9 @@ HTML;
                             
                             </ul>
                         </div>
+
+                        <?php echo $steps_list ?>
+
                 </div>                
 
                 <br>
