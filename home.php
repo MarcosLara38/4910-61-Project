@@ -1,3 +1,20 @@
+<?php 
+    require_once "connect.php";
+    
+    if(isset($_POST['sub_ing'])){
+
+        if(!$_POST['ing_search']){
+            $ing_search_err = "Need ingredient(s) for search";
+        }else{
+            $ing_search = implode('. ', $_POST['ing_search']);
+            $ing_search_list = "Ingredient(s) to search: $ing_search <br>";
+        }
+
+
+    }
+
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +28,7 @@
 <body>
     <div class = "nav">
     <?php 
-        require_once "connect.php";
+        
         require "nav.php";
     ?>
     </div>
@@ -27,19 +44,27 @@ HTML;
 			endif; ?>
     <div>
         <div class = "body">
-            <div id="list-container">
-                <ul id = "ingredient_list">
 
-                </ul>
-           </div>
+            <form method="POST" id = "searchform">
+        
 
-            <div class = "additem">
-                <input id ="addingi" type = "text" placeholder="Add ingredient...">
-                <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
-                <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
-                <button type = "button" class = "search" onclick = "get_list_items();">Search</button>
-            </div>
+                <div id="list-container">
+                    <ul id = "ingredient_list">
 
+                    </ul>
+                </div>
+
+                <div class = "additem">
+                    <?php echo "$ing_search_err <br>"?>
+                    <input id ="addingi" type = "text" placeholder="Add ingredient...">
+                    <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
+                    <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
+                    <input class = "sub_ing" type = "submit" name = "sub_ing" value = "Search"><br>
+                    <?php echo "$ing_search_list <br>"?>
+                    <!--<button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
+                </div>
+
+            </form>
 
         </div>
     </div>

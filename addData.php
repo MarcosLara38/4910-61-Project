@@ -1,13 +1,12 @@
 <?php
     require_once "connect.php";
-    //Need to remove last comma from category of food ex: breakfeast, lunch, dinner,
+    //die(print_r($_POST['ingredients'], true));
     //Need to figure out how to have the drop down box not be zero, so its easier to see when its checked
     //print("breakfast in checkboxes:". in_array('lunch', $_POST['cat_checkbox'])."<BR />");
     //die("<PRE>". print_r($_POST,true));
     $recname_valid = true; 
     $cat_valid = true;
-    $cooktime_valid = true;
-    $servsize_valid = true;
+    $cooktimedrop_valid = true;
     $servesizedrop_valid = true;
     $veganboolradio_valid = true;
     
@@ -36,12 +35,15 @@
             $checked_count = count($_POST['cat_checkbox']);
             #echo "You have selected following ".$checked_count." option(s): <br/>";
             // Loop to store and display values of individual checked checkbox.
-            foreach ($_POST['cat_checkbox'] as $chk1) {
+            $selected = implode(', ', $_POST['cat_checkbox']); //joins a string by the separator ', '
+            //explode $ex: 'this,is,my,string' explode(',' $ex) => array('this', 'is', 'my', 'string');
+
+            /*foreach ($_POST['cat_checkbox'] as $chk1) {
                 $selected .= $chk1 . ", ";
                 //substr($selected, 0, -1);                
                 //$selected = rtrim($selected,',');
                 #echo "<p>".$selected ."</p>";
-            }
+            }*/
         }
         else {
             $cat_valid = false;
@@ -50,24 +52,15 @@
 
 
         # Cook time setting variable and boolean if isset/not empty 
-        if(empty($_POST['cook_time'])){
-            $cooktime_err = "Cook time is required";
-            $cooktime_valid = false;
+        if(($_POST['cooktimedrop']) == 0){
+            $cooktimedrop_valid = false;
+            $cooktimedrop_err = "Need to have serving size please";
         }else{
-            $cook_time =cleaninput($_POST['cook_time']);
+            $cookTimeDropValue = $_POST['cooktimedrop'];
         }
 
        
         # Serving size setting variable and boolean if isset/not empty 
-        if(empty($_POST['serving_size'])){
-            $servsize_valid = false;
-            $servsize_err = "Need to have serving size please";
-        }else{
-            
-            $serving_size = cleaninput($_POST['serving_size']);
-        }
-
-
         if(($_POST['servingsizedrop']) == 0){
             $servingsizedrop_err = "Need to have serving size please";
             $servesizedrop_valid = false;
@@ -86,27 +79,21 @@
             $veganboolradio_valid = true;
             $veganans = cleaninput($_POST['vegan_boolean']);
         }
-/*
-         # Add ingredients setting variable/arrays and boolean if isset/not empty
-         # Come back to this to fix arrays/ how itll work ############################################
-         if(empty($_POST['ingredients'])){
-            $add_notesmsg = "No additional Informatio needed";
+
+        if(!$_POST['ingredients']){
+            echo "no ingredient given <br> ";
         }else{
-            $add_ingredients = cleaninput($_POST['ingredients']);
+            $ingredients = implode(', ', $_POST['ingredients']);
+            echo "Ingredients given were: $ingredients <br>";
         }
 
-        # Add steps setting variable/arrays and boolean if isset/not empty
-        # Come back to this to fix arrays/ how itll work ############################################
-        if(empty($_POST['add_steps'])){
-            $add_stepsmsg = "No additional Informatio needed";
+        if(!$_POST['steps']){
+            echo "no steps given <br> ";
         }else{
-            $add_steps = cleaninput($_POST['add_steps']);
+            $steps = implode(', ', $_POST['steps']);
+            echo "steps given for recipe were: $steps <br>";
         }
 
-        //ingredients, need to do differently 
-        
-*/
-//<input type='hidden' name='ingredients[]' value='2 eggs'>
     }
 
     
@@ -123,12 +110,11 @@
     //escape user inputs for security
     //$recipe_name = mysqli_real_escape_string($link,$_REQUEST['recipe_name']);
     //testing 
-    /*
+/*    
     echo "Recipe Name: $recipe_name<br>";
     echo "Category of food: $selected<br>";
-    echo "Cook time: $cook_time<br>";
-    echo "Serving size: $serving_size <br>";
-    echo "Serving Size Drop down: $servingsizedrop <br>";
+    echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
+    echo "Serving Size Drop down: $drop_value <br>";
     echo  "Is it vegan? $veganans<br>";
     
     echo "Recipe Name: $recname_valid <br>";
@@ -138,15 +124,15 @@
     echo "Vegan bool: $veganboolradio_valid<br>";
     echo "Steps: $addsteps_valid<br>";
     echo "ingredients: $addingredients_valid <br>";
-*/
+
 
     //if Entires are valid then add data to database
-    /*if($recname_valid && $cat_valid && $cooktime_valid && $servsize_valid
+    if($recname_valid && $cat_valid && $cooktimedrop_valid && $servesizedrop_valid
         && $veganboolradio_valid && $addsteps_valid && $addingredients_valid){
             echo "All entries are valid, preparing to enter into database<br>";
             
             $sql = "INSERT INTO rec_test (RecipeName, CategoryFood, CookTime, ServingSize, Vegan)
-            VALUES ('$recipe_name','$selected','$cook_time','$serving_size','$veganans')";
+            VALUES ('$recipe_name','$selected','$cookTimeDropValue','$drop_value','$veganans')";
 
             if(mysqli_query($conn, $sql)){
                 echo "New records created successfully";
@@ -158,10 +144,9 @@
         }else{
             echo "All entries are not valid and therefore cannot proceed, please fix issues";
         }
-        */
-
-    
+*/
     ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -235,23 +220,28 @@ HTML;
                
                 <br>
 
-                <!-- Cooktime Input Field -->
-                <label class = "ctime_label" for = "cook_time">Cook Time: </label>
-                <input class = "cook_time" type="text" name = "cook_time" placeholder = "2 hrs" <?php if(!$cooktime_valid){ echo " style = 'border: 4px solid black'";} else{ echo "value = '$cook_time' ";} ?> > 
-                <?php echo $cooktime_err; ?>
-                <br>
-
-                <!-- Serving Size Input Field -->
-                <label for = "serving_size">Serving Size:How many will it feed?: </label>
-                <input class = "serving_size" type="text" name = "serving_size" placeholder = "1 Person"<?php if(!$servsize_valid){ echo " style = 'border: 4px solid black'";} else{ echo "value = '$serving_size' ";} ?> > 
-                <?php echo $servsize_err; ?>
-                <br>
+                <!-- Cooktime drop down testing -->
+                <?php echo "$cooktimedrop_err" ?>
+                <label for="cooktimedrop" <?php if(!$cooktimedrop_valid){ echo " style = 'border: 4px solid black'";}?>>How long does it take to make?</label>
+                <select name ="cooktimedrop" id ="cookdropdown" required>
+                    <option value = "0"> 0 </option>
+                    <option <?php if ($cookTimeDropValue == '1') { ?>selected="true" <?php }; ?>value= "1">  Less Than 15Mins </option> 
+                    <option <?php if ($cookTimeDropValue == '15') { ?>selected="true" <?php }; ?>value= "15"> 15 Mins </option> 
+                    <option <?php if ($cookTimeDropValue == '30') { ?>selected="true" <?php }; ?>value= "30"> 30 Mins </option> 
+                    <option <?php if ($cookTimeDropValue == '45') { ?>selected="true" <?php }; ?>value= "45"> 45 Mins </option> 
+                    <option <?php if ($cookTimeDropValue == '60') { ?>selected="true" <?php }; ?>value= "60"> 1 Hour </option> 
+                    <option <?php if ($cookTimeDropValue == '90') { ?>selected="true" <?php }; ?>value= "90"> 1.5 Hours </option> 
+                    <option <?php if ($cookTimeDropValue == '120') { ?>selected="true" <?php }; ?>value= "120"> 2 Hours </option> 
+                    <option <?php if ($cookTimeDropValue == '180') { ?>selected="true" <?php }; ?>value= "180"> 3 Hours</option> 
+                    <option <?php if ($cookTimeDropValue == '240') { ?>selected="true" <?php }; ?>value= "240"> 4 Hours </option> 
+                <select>
+                <br><br>
 
                 
                 <!-- Serving Size drop down testing -->
                 <?php echo "$servingsizedrop_err" ?>
                 <label for="servingsizedrop" <?php if(!$servesizedrop_valid){ echo " style = 'border: 4px solid black'";}?>>How many will it feed?</label>
-                <select name ="servingsizedrop" id ="dropdown" required>
+                <select name ="servingsizedrop" id ="servingdropdown" required>
                     <option value = "0"> 0 </option>
                     <option <?php if ($drop_value == '1') { ?>selected="true" <?php }; ?>value= "1"> 1 </option> 
                     <option <?php if ($drop_value == '2') { ?>selected="true" <?php }; ?>value= "2"> 2 </option> 
@@ -308,8 +298,6 @@ HTML;
                         <label for = "add_steps">Steps:  </label>
                         <input id = "addSteps" type = "text" name = "add_steps" placeholder = "Add Salt to Eggs">
                         <button type = "button" class = "addStepbtn" onclick = "addStep();" >Add Step</button>
-                        <!--<button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
-                        <button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
 
                         <div id="addStepList-container">
                             <ul id = "addStep_list">

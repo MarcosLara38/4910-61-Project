@@ -22,8 +22,12 @@ function addingredient(){
     var li = document.createElement("li");
     var input = document.getElementById("addingi").value; 
     var t = document.createTextNode(input);
+    var hidden = document.createElement('input');
     li.appendChild(t);
     li.setAttribute('class',"new_ing");
+    hidden.type = 'hidden';
+    hidden.name = 'ing_search[]';
+    hidden.value = input
 
     if(input === ""){
         alert("empty input");
@@ -42,6 +46,8 @@ function addingredient(){
     span.className = "del";
     span.appendChild(txt);
     li.appendChild(span);
+    li.appendChild(hidden);
+
 
     //click x to remove item
     for(i = 0; i < del.length;i++){
