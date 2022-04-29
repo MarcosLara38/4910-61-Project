@@ -156,9 +156,9 @@ function cleaninput($data){
     <label for="fname">First Name:</label>
     <input type="text" id="fname" name="fname" placeholder="" <?php if(!$fnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$fname' ";} ?> > <?php echo $nameerr; ?> <br>
     <label for="lname">Lastname:</label>
-    <input type="text" id="lname" name="lname" placeholder="" <?php if(!$lnamevalid){ echo " style = 'border: 1px solid red'";} ?> ><?php echo $lnameerr;?><br>
+    <input type="text" id="lname" name="lname" placeholder="" <?php if(!$lnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$lname' ";} ?>?> ><?php echo $lnameerr;?><br>
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" placeholder="" <?php if(!$emailvalid){ echo " style = 'border: 1px solid red'";} ?> ><?php echo $emailerr;?><br>
+    <input type="email" id="email" name="email" placeholder="" <?php if(!$emailvalid){ echo " style = 'border: 1px solid red'";}else{ echo "value = '$email' ";} ?> ?> ><?php echo $emailerr;?><br>
     <label for="pword">Password:</label>
     <input type="password" id="pword" name="pword" placeholder="" <?php if(!$pwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $pworderr;?><br>
     <label for="confirmpword">Confirm Password:</label>
