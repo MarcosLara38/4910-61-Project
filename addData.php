@@ -109,13 +109,14 @@
 
 
 
-/*    
+   
     echo "Recipe Name: $recipe_name<br>";
     echo "Category of food: $selected<br>";
     echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
     echo "Serving Size Drop down: $drop_value <br>";
     echo  "Is it vegan? $veganans<br>";
     
+/*     
     echo "Recipe Name: $recname_valid <br>";
     echo "Category: $cat_valid<br>";
     echo "Cooktime: $cooktime_valid<br>";
@@ -123,6 +124,7 @@
     echo "Vegan bool: $veganboolradio_valid<br>";
     echo "Steps: $addsteps_valid<br>";
     echo "ingredients: $addingredients_valid <br>";
+
 
 
     //if Entires are valid then add data to database
