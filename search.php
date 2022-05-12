@@ -1,8 +1,11 @@
-<?php
-    require_once "connect.php";
-?>
-
 <!DOCTYPE html>
+
+<?php
+        
+    require_once "connect.php";
+    require_once "dbFunc.php";
+    
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,11 +32,14 @@
             </ul>
 
             <div class = "searchdiv">
-                <input type = "text" class = "searchinput" placeholder="Search recipe...">
-                <button type = "button" class = "searchbtn" onclick="addingredient()">Search Recipe</button>
-                
+                <form method="post">
+                    <input type = "text" class = "searchinput" name="searchQuery" placeholder="Search by recipe name..." value="">
+                    <input type = "submit" name="searchBtn" value="Search" class = "searchbtn">
+                </form>
             </div>
-            <div id="objectinfo"></div>
+            <div style="margin-top: 100px;" id="objectinfo">
+                <h1>test</h1>
+            </div>
 
         </div>
     </div>

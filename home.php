@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
     require_once "connect.php";
     
@@ -43,7 +44,7 @@
 
 ?> 
 
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,7 +54,7 @@
     <script src="final.js"></script>
     <title>Foodify</title>
 </head>
-<body>
+<body >
     <div class = "nav">
     <?php 
         

@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    // if(isset($_SESSION)){
+    //     print_r($_SESSION);
+    // }
+
     $host = 'localhost';
     $user = 'orodriguez';
     $dbpassword = 'Zegh86Gupm';

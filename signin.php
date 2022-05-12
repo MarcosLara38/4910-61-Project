@@ -28,6 +28,7 @@
             if ($result->num_rows == 1) {
                 $data = $result->fetch_assoc();
                 $_SESSION['logged_in'] = true;
+                $_SESSION['userid'] = $data['id'];
                 $_SESSION['name'] = $data['fname'];
                 header("Location: home.php");
             }
