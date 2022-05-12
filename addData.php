@@ -108,6 +108,10 @@ error_reporting(1);
             $steps_list = "steps given for recipe were: $steps <br>";
         }
 
+
+
+
+        
             //if Entires are valid then add data to database
         if($recname_valid && $cat_valid && $cooktimedrop_valid && $servesizedrop_valid && $veganboolradio_valid && $addsteps_valid && $addingredients_valid){
             echo "All entries are valid, preparing to enter into database<br>";
@@ -117,32 +121,46 @@ error_reporting(1);
 
             if(mysqli_query($conn, $sql)){
                 echo "New records created successfully<br>";
-                $id = mysqli_insert_id($conn);
-               
-                
-                for($i = 0 ; $i < count($_POST['ingredients']); $i++){
+            }else{
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+            $id = mysqli_insert_id($conn);
+            
+            for($i = 0 ; $i < count($_POST['ingredients']); $i++){
                 $ingredient = $_POST['ingredients'][$i];
                 $quantity = $_POST['quantities'][$i];
-
-               $ingredient = mysqli_real_escape_string( $conn,$ingredient);
+                $ingredient = mysqli_real_escape_string( $conn,$ingredient);
                 $quantity = mysqli_real_escape_string( $conn,$quantity);
-
-               $sql = "INSERT INTO ingredients (recipeid , name, amount) 
+                $sql = "INSERT INTO ingredients (recipeid , ingredients, quantity) 
                 values ($id, '$ingredient', '$quantity')";
-                echo $sql."<br/>";
+                //echo $sql."<br/>";
 
                 if(mysqli_query($conn, $sql)){
                     echo "New records also created successfully into the ingredients table<br>";
                 }
                 else{
-                    echo "Error, did not enter records into ingredients table";
+                    echo "Error, did not enter records into ingredients table<br>";
                 }
+            }
+
+            for($i = 0 ; $i < count($_POST['steps']); $i++){
+                //$id = mysqli_insert_id($conn);
+
+                $steps = $_POST['steps'][$i];
+                $steps = mysqli_real_escape_string( $conn,$steps);
+
+                $sql = "INSERT INTO steps (recipeid , recipestep) 
+                values ($id, '$steps')";
+                //echo $sql."<br/>";
+
+                if(mysqli_query($conn, $sql)){
+                    echo "New records entered in steps<br>";
+                }else{
+                    echo "New records not entered in steps<br>";
                 }
-    
             }
-            else{
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+
 
         }else{
             echo "All entries are not valid and therefore cannot proceed, please fix issues";
@@ -181,7 +199,6 @@ error_reporting(1);
 
 
 
-/*
     echo "<br>";
     echo "<br>";    
     
@@ -194,7 +211,7 @@ error_reporting(1);
     echo "ingredients: $addingredients_valid <br>";
     echo "Steps: $addsteps_valid<br>";
 
-*/
+
 
     
 
