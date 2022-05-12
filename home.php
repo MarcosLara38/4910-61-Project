@@ -1,47 +1,7 @@
 <!DOCTYPE html>
 <?php 
     require_once "connect.php";
-    
-    if(isset($_POST['sub_ing'])){
-
-        if(!$_POST['ing_search']){
-            $ing_search_err = "Need ingredient(s) for search";
-        }else{
-            $ing_search = implode('. ', $_POST['ing_search']);
-            $ing_search_list = "Ingredient(s) to search: $ing_search <br>";
-
-            for($i = 0; $i < count($_POST['ing_search']); $i++){
-                $ings[$i] = $_POST['ing_search'][$i];
-                //$ings = mysqli_real_escape_string( $conn,$ings);
-               
-                
-               // $sql = "SELECT * FROM ingredients WHERE ingredients = '$ings' and recipeid=";
-                //if($sql == 1){
-                //    $data = $result->fetch_assoc
-                //}
-                echo "Ingredients = $ings<br>";
-            }
-           echo  $sql = 'SELECT * FROM ingredients WHERE ingredients IN ("' . implode('", "', $ings) . '")';
-            //echo "Ingredients Out of For loop = $ings<br>";
-        }
-
-
-    }
-
-    //Grab the array of ingredients entred by the user
-    //compare the ingredients entered by user and compare to the ingredients in the table
-    //if the ingredient is the same as table ingredient, return the recipeid(do i need an array?)
-    //then use the recipeid to get the recipe that correlates with the ingredients they have
-
-    //if there are no options, then offer the user recipes that can be 
-    // +++made with some of the recipes they have on hand
-    //ie: they enter eggs, flour, sugar,
-    //the computer returns: sorry no match to recipes but you can make cake if you have other recipes
-
-
-
-
-
+    require_once "dbFunc.php";
 ?> 
 
 
@@ -89,12 +49,25 @@ HTML;
                     <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
                     <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
                     <input class = "sub_ing" type = "submit" name = "sub_ing" value = "Search"><br>
-                    <?php echo "$ing_search_list <br>"?>
+                    
                     <!--<button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
                 </div>
 
             </form>
 
+            <div style="margin-top: 100px;">
+                <?php
+                    if($_POST['sub_ing'] != null){
+                        if($ingdata != null){
+                            print "<h1>Found $rows Recipes</h1>";
+                            for($i=0;$i<$rows;$i++){
+                                print "<p>". $ingdata[$i][0] ."</p><br>";
+                            }
+                        } else {print "<h1>No Results found for $string </h1>";}
+                    }
+                ?>
+            </div>
+            
         </div>
     </div>
 

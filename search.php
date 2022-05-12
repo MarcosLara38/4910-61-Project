@@ -4,7 +4,7 @@
         
     require_once "connect.php";
     require_once "dbFunc.php";
-    
+
 ?>
 <html lang="en">
 <head>
@@ -38,8 +38,20 @@
                 </form>
             </div>
             <div style="margin-top: 100px;" id="objectinfo">
-                <h1>test</h1>
+                <?php
+                    if(isset($_POST['searchBtn'])){
+                        if($data != null){
+                            print "<h1>Found $rows Recipes</h1>";
+                            for($i=0;$i<$rows;$i++){
+                                print "<p>". $data[$i][1] ."</p><br>";
+                            }
+                        } else {print "<h1>No Results found for $RecipeName </h1>";}
+                    }
+                ?>
+
             </div>
+            
+
 
         </div>
     </div>
