@@ -1,4 +1,5 @@
-<?php
+<?php ini_set("display_errors",1);
+error_reporting(1);
     require_once "connect.php";
     //die(print_r($_POST['ingredients'], true));
     //Need to figure out how to have the drop down box not be zero, so its easier to see when its checked
@@ -10,8 +11,11 @@
     $servesizedrop_valid = true;
     $veganboolradio_valid = true;
     
-    $addsteps_valid = true;
+
     $addingredients_valid = true;
+    $addquantity_valid = true;
+    $addsteps_valid = true;
+    
     
 
     $recname_err = "";
@@ -81,11 +85,19 @@
         }
 
         if(!$_POST['ingredients']){
-            $ing_error = "no ingredient given <br> ";
+            $ing_error = "No ingredients given <br> ";
             $addingredients_valid = false;
         }else{
             $ingredients = implode(', ', $_POST['ingredients']);
             $ingredients_list = "Ingredients given were: $ingredients <br>";
+        }
+
+        if(!$_POST['quantities']){
+            $qty_error = "No quantities given <br> ";
+            $addquantities_valid = false;
+        }else{
+            $quantities = implode(', ', $_POST['quantities']);
+            $quantities_list = "Quantities given were: $quantities <br>";
         }
 
         if(!$_POST['steps']){
@@ -95,6 +107,52 @@
             $steps = implode(', ', $_POST['steps']);
             $steps_list = "steps given for recipe were: $steps <br>";
         }
+
+            //if Entires are valid then add data to database
+        if($recname_valid && $cat_valid && $cooktimedrop_valid && $servesizedrop_valid && $veganboolradio_valid && $addsteps_valid && $addingredients_valid){
+            echo "All entries are valid, preparing to enter into database<br>";
+            
+            $sql = "INSERT INTO recipes (RecipeName, CategoryFood, CookTime, ServingSize, Vegan)
+            VALUES ('$recipe_name','$selected','$cookTimeDropValue','$drop_value','$veganans')";
+
+            if(mysqli_query($conn, $sql)){
+                echo "New records created successfully<br>";
+                $id = mysqli_insert_id($conn);
+               
+                
+                for($i = 0 ; $i < count($_POST['ingredients']); $i++){
+                $ingredient = $_POST['ingredients'][$i];
+                $quantity = $_POST['quantities'][$i];
+
+               $ingredient = mysqli_real_escape_string( $conn,$ingredient);
+                $quantity = mysqli_real_escape_string( $conn,$quantity);
+
+               $sql = "INSERT INTO ingredients (recipeid , name, amount) 
+                values ($id, '$ingredient', '$quantity')";
+                echo $sql."<br/>";
+
+                if(mysqli_query($conn, $sql)){
+                    echo "New records also created successfully into the ingredients table<br>";
+                }
+                else{
+                    echo "Error, did not enter records into ingredients table";
+                }
+                }
+    
+            }
+            else{
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+        }else{
+            echo "All entries are not valid and therefore cannot proceed, please fix issues";
+        }
+
+        //recipe id back 
+        //link for id to prima from main recp data. 
+
+
+
 
     }
 
@@ -115,37 +173,31 @@
     echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
     echo "Serving Size Drop down: $drop_value <br>";
     echo  "Is it vegan? $veganans<br>";
+    echo $ingredients_list;
+    echo $quantities_list;
+
+    //insert to recipe table
+    // get recipe_id back
+
+
+
+/*
+    echo "<br>";
+    echo "<br>";    
     
-/*     
+     
     echo "Recipe Name: $recname_valid <br>";
     echo "Category: $cat_valid<br>";
-    echo "Cooktime: $cooktime_valid<br>";
-    echo "Serving Size: $servsize_valid<br>";
+    echo "Cooktime: $cooktimedrop_valid<br>";
+    echo "Serving Size: $servesizedrop_valid<br>";
     echo "Vegan bool: $veganboolradio_valid<br>";
-    echo "Steps: $addsteps_valid<br>";
     echo "ingredients: $addingredients_valid <br>";
+    echo "Steps: $addsteps_valid<br>";
 
-
-
-    //if Entires are valid then add data to database
-    if($recname_valid && $cat_valid && $cooktimedrop_valid && $servesizedrop_valid
-        && $veganboolradio_valid && $addsteps_valid && $addingredients_valid){
-            echo "All entries are valid, preparing to enter into database<br>";
-            
-            $sql = "INSERT INTO rec_test (RecipeName, CategoryFood, CookTime, ServingSize, Vegan)
-            VALUES ('$recipe_name','$selected','$cookTimeDropValue','$drop_value','$veganans')";
-
-            if(mysqli_query($conn, $sql)){
-                echo "New records created successfully";
-            }
-            else{
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-
-        }else{
-            echo "All entries are not valid and therefore cannot proceed, please fix issues";
-        }
 */
+
+    
+
     ?>
 
 
@@ -241,7 +293,7 @@ HTML;
                 
                 <!-- Serving Size drop down testing -->
                 <p <?php if(!$servesizedrop_valid){ echo " style = 'color:Black'";} ?>> <?php echo "$servingsizedrop_err<br>" ?> </p>
-                <label for="servingsizedrop" <?php if(!$servesizedrop_valid){ echo " style = 'border: 1px solid black'";}?>>How many will it feed?</label>
+                <label for="servingsizedrop">How many will it feed?</label>
                 <select name ="servingsizedrop" id ="servingdropdown" required>
                     <option value = "0"> 0 </option>
                     <option <?php if ($drop_value == '1') { ?>selected="true" <?php }; ?>value= "1"> 1 </option> 
@@ -274,16 +326,20 @@ HTML;
 
 
 
-                    <!-- Adding Ingredients Fields(many) -->
+                    <!-- Adding Ingredients Fields(many) and the quantity -->
                     <div class = "addIngredient">
                         <p> Syntax = Amount ingredient</p>
                         <p> Example = 3 cups of Milk </p>
-                        <p <?php if(!$addingredients_valid){ echo " style = 'color:Black'";} ?>> <?php echo $ing_error; ?> </p>
+                        <p <?php if(!$addingquality_valid){ echo " style = 'color:Black'";} ?>> <?php echo $ing_error; ?> </p>
+                        <label for = "Quanty">Quantity: </label>
+                        <input id ="addQtyInput" type = "text" name = "qty" placeholder="2 cups"><br> 
+                        <p <?php if(!$addingquality_valid){ echo " style = 'color:Black'";} ?>> <?php echo $qty_error; ?> </p>
                         <label for = "ingredients">Ingredients: </label>
-                        <input id ="addDataInput" type = "text" name = "ingredients" placeholder="2 eggs">
+                        <input id ="addDataInput" type = "text" name = "ingredients" placeholder="Flour"><br>
                         <button type = "button" class = "addDatabtn" onclick = "addDataIng();" >Add ingredient</button><br>
-                        <label for = "Quanty">Qty: </label>
-                        <input id ="addQtyInput" type = "text" name = "qty" placeholder="quantity">
+
+                        
+                        
                         
                         <!--<button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
                         <button type = "button" class = "search" onclick = "get_list_items();">Search</button> -->
@@ -319,7 +375,7 @@ HTML;
 
                 <br>
 
-                <input class = "add_submit" type = "submit" name = "submit" value = "Submit">        
+                <input class = "add_submit" type = "submit" onclick="return clicked();" name = "submit" value = "Submit">        
                 </form> 
 
         </div>
