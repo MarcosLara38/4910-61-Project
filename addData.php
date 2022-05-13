@@ -237,9 +237,16 @@ error_reporting(1);
       input {
         padding: 5px 10px;
       }
+    .bgbody {
+        background:url('pics/backgroundfull.jpeg');background-size:cover;
+        background-attachment: fixed;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+    }
     </style>
 </head>
-<body>
+<body class="bgbody"  style="">
+
     <div class = "nav">
     <?php 
         require "nav.php";
@@ -353,7 +360,7 @@ HTML;
                         <input id ="addQtyInput" type = "text" name = "qty" placeholder="2 cups"><br> 
                         <p <?php if(!$addingquality_valid){ echo " style = 'color:Black'";} ?>> <?php echo $qty_error; ?> </p>
                         <label for = "ingredients">Ingredients: </label>
-                        <input id ="addDataInput" type = "text" name = "ingredients" placeholder="Flour"><br>
+                        <input id ="addDataInput" type = "text" name = "ingredients" placeholder="Flour">
                         <button type = "button" class = "addDatabtn" onclick = "addDataIng();" >Add ingredient</button><br>
 
                         

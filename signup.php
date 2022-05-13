@@ -19,14 +19,14 @@ if (isset($_POST['submit'])){
 
     if (empty($_POST["fname"])) {
         $fnamevalid = false;
-      $fnameerr = "Name is required";
+      $fnameerr = "First Name is required";
     } else {
       $fname = cleaninput($_POST["fname"]);
     }
 
     if (empty($_POST["lname"])) {
         $lnamevalid = false;
-      $lnameerr = "Name is required";
+      $lnameerr = "Last Name is required";
     } else {
       $lname = cleaninput($_POST["lname"]);
     }
@@ -158,22 +158,22 @@ function cleaninput($data){
     <img src="pics/logo.png"> 
   </div>
 <?php if(!$validpassword) { ?>
-<form method="POST" id='signup'>
-
-<p id='welcomesignup'>You're almost there, Just need some information about you first!</p>
-    <label for="fname">First Name:</label>
-    <input type="text" id="fname" name="fname" placeholder="" <?php if(!$fnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$fname' ";} ?> > <?php echo $nameerr; ?> <br>
-    <label for="lname">Lastname:</label>
-    <input type="text" id="lname" name="lname" placeholder="" <?php if(!$lnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$lname' ";} ?>?> ><?php echo $lnameerr;?><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" placeholder="" <?php if(!$emailvalid){ echo " style = 'border: 1px solid red'";}else{ echo "value = '$email' ";} ?> ?> ><?php echo $emailerr;?><br>
-    <label for="pword">Password:</label>
-    <input type="password" id="pword" name="pword" placeholder="" <?php if(!$pwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $pworderr;?><br>
-    <label for="confirmpword">Confirm Password:</label>
-    <input type="password" id="confirmpword" name="confirmpword" placehorlder="" <?php if(!$confirmpwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $confirmpworderr;?><br>
-    <input type="submit" value="submit" name="submit">
-</form>
-<?php }else echo "Thank you $fname, you will be entered in our database. "?>
-
+<div class = signup>
+  <form method="POST" id='signup'>
+  <p id='welcomesignup'>You're almost there, Just need some information about you first!</p>
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname" placeholder="" <?php if(!$fnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$fname' ";} ?> > <?php echo $fnameerr; ?> <br>
+      <label for="lname">Lastname:</label>
+      <input type="text" id="lname" name="lname" placeholder="" <?php if(!$lnamevalid){ echo " style = 'border: 1px solid red'";} else{ echo "value = '$lname' ";} ?>?> <?php echo $lnameerr;?><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="" <?php if(!$emailvalid){ echo " style = 'border: 1px solid red'";}else{ echo "value = '$email' ";} ?> ?> <?php echo $emailerr;?><br>
+      <label for="pword">Password:</label>
+      <input type="password" id="pword" name="pword" placeholder="" <?php if(!$pwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $pworderr;?><br>
+      <label for="confirmpword">Confirm Password:</label>
+      <input type="password" id="confirmpword" name="confirmpword" placehorlder="" <?php if(!$confirmpwordvalid){ echo " style = 'border: 1px solid red'";} ?>><?php echo $confirmpworderr;?><br>
+      <input type="submit" value="submit" name="submit">
+  </form>
+  <?php }else echo "Thank you $fname, you will be entered in our database. "?>
+</div>
 </body>
 </html>

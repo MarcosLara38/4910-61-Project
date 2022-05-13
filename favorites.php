@@ -8,8 +8,16 @@
     <link rel="stylesheet" type="text/css" href="home.css">
     <script src="final.js"></script>
     <title>Foodify</title>
+    <style>
+        .bgbody {
+            background:url('pics/backgroundfull.jpeg');background-size:cover;
+            background-attachment: fixed;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+        }
+        </style>
 </head>
-<body>
+<body class="bgbody" >
     <div class = "nav">
     <?php 
         require_once "connect.php";
