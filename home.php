@@ -61,7 +61,7 @@ HTML;
                         if($ingdata != null){
                             print "<h1>Found $rows Recipes</h1>";
                             for($i=0;$i<$rows;$i++){
-                                print "<p>". $ingdata[$i][0] ."</p><br>";
+                                print "<p>". $ingdata[$i]['recipeid'] ." " . $ingdata[$i]['RecipeName'] ." (". $ingdata[$i]['CookTime'] . " minutes)</p><br>";
                             }
                         } else {print "<h1>No Results found for $string </h1>";}
                     }

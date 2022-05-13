@@ -26,11 +26,11 @@
             }
             $string = implode('|', $ings);
             print $string;
-            $stmt = $conn->prepare("SELECT recipeid FROM ingredients WHERE ingredients REGEXP ?");
+            $stmt = $conn->prepare("SELECT DISTINCT recipes.* FROM ingredients LEFT JOIN recipes using(recipeid) WHERE ingredients REGEXP ?");
             $stmt->bind_param("s", $string);
             $stmt->execute();
             $output = $stmt->get_result();
-            $ingdata = $output->fetch_all();
+            $ingdata = $output->fetch_all(MYSQLI_ASSOC);
             $rows = count($ingdata);
         }
 
