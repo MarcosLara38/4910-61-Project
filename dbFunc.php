@@ -71,9 +71,10 @@
                 $rows = count($ingdata);
             }
 
+
         }
-            
     }
+            
 
 
     if(isset($_POST['selection'])) {
