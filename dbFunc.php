@@ -61,13 +61,8 @@
             $ingdata = $output->fetch_all(MYSQLI_ASSOC);
             $rows = count($ingdata);
 
-<<<<<<< HEAD
-<<<<<<< ::HEAD
 
-=======
->>>>>>> a403a3080402e38f45fa2a9051073861a330f8c0
-=======
->>>>>>> 0079001d2ce58671c26ef79329ace95fdc807007
+
             if($ingdata == null){
                 $string = implode('|', $ings);
                 //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid FROM ingredients WHERE ingredients in ($string) group by recipeid having count(distinct ingredients) = $count)";
