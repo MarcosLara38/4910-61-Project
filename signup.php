@@ -77,8 +77,8 @@ if (isset($_POST['submit'])){
             Echo "All entries are valid. Ready to enter info into database<br>";
 
             $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (?, ?, ?, ?)");
-            
             $stmt->bind_param("ssss", $fname, $lname, $email, $hashed);
+            
         if ($stmt->execute()) {
             
             $_SESSION['logged_in'] = true;

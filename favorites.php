@@ -3,7 +3,7 @@
 <?php
     $stmtrun = false;
     require_once "connect.php";
-    $stmt = $conn->prepare("SELECT * FROM favorites INNER JOIN recipes ON recipes.recipeid = favorites.recipeid AND userid = ?");
+    $stmt = $conn->prepare("SELECT DISTINCT * FROM recipes INNER JOIN favorites ON recipes.recipeid = favorites.recipeid AND userid = ? GROUP by recipes.recipeid");
     $stmt->bind_param("i", $_SESSION['userid']);
     if($stmt->execute()){
         $result = $stmt->get_result();

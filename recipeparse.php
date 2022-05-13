@@ -53,9 +53,10 @@
 
     <img src="pics/logo.png"><br><br><br>  
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
-			<h2>Welcome, Guest You Are Not Logged In</h2>
+			<h2>Welcome Guest You Are Not Signed In</h2>
             <br>
-            <h4> Please sign in to add this recipe to your favorites </h4> 
+            <h4> Please sign in to add this recipe to your favorites </h4>
+            <a href='signin.php'>Sign in</a>
 			
 		<?php else: 
 			print <<<HTML
@@ -71,8 +72,7 @@ HTML;
                         print "<div id = 'boxRecipe'>";
                         print "<h3 id = boxName>" . $data1[0]['RecipeName'] . "</h3>";
                         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
-                            print "<form method='post'>";
-                            print "<input class='clearbtn' type='submit' value='Add to Favorites' name='favoriteSelection'></form><br>";
+                            print "<form method='post'><input class='clearbtn' type='submit' value='Add to Favorites' name='favoriteSelection'></form><br>";
                         }
                         print "<p>". "CookTime: " . $data1[0]['CookTime'] . " minutes</p>";
                         print "<p>". "Category of food is: " . $data1[0]['CategoryFood'] . "</p>";
@@ -92,7 +92,8 @@ HTML;
                     } if ($data1 == null && $favoritesend == false && isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {print "<h1>OOPS SOMETHING WENT WRONG</h1>";}
                     if ($favoritesend == true){
                             print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1>";
-                            
+                            print "<form method='post'><input class='clearbtn' type='submit' value='To Home' name='backToHome'></form>";
+                            print "<form method='post'><input class='clearbtn' type='submit' value='To Search Page' name='backToSearch'></form><br>";
                         }
                 ?>
             </div>
