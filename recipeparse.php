@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <?php 
     require_once "connect.php";
+    require_once "dbFunc.php";
 
-    $stmt = $conn->prepare("SELECT * FROM recipes WHERE recipeid = ?");
-
+    $stmt = $conn->prepare("SELECT DISTINCT * FROM recipes INNER JOIN steps ON steps.recipeid = recipes.recipeid WHERE recipes.recipeid = ?");
     $stmt->bind_param("i", $_SESSION['selectedRecipeID']);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($result->num_rows == 1) {
-        $data = $result->fetch_assoc();
-        var_dump($data);
-        // header("Location: home.php");
+
+    if ($result->num_rows > 0) {
+        $data1 = $result->fetch_all(MYSQLI_ASSOC);
+        $rows = count($data1);
     }
     $result->free();
+
+    $stmt = $conn->prepare("SELECT DISTINCT * FROM recipes INNER JOIN ingredients ON ingredients.recipeid = recipes.recipeid WHERE recipes.recipeid = ?");
+    $stmt->bind_param("i", $_SESSION['selectedRecipeID']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $data2 = $result->fetch_all(MYSQLI_ASSOC);
+        $rows2 = count($data2);
+    }
 
 ?> 
 
@@ -26,7 +35,7 @@
     <script src="final.js"></script>
     <title>Foodify</title>
 </head>
-<body >
+<body class='bgbody' >
     <div class = "nav">
     <?php 
         
@@ -45,15 +54,26 @@ HTML;
 			endif; ?>
     <div>
         <div class = "body">
-
+            
             <div style="margin:25px;">
                 <?php
-                    if($data != null){
+                    if($data1 != null && $data2 != null){
                         print "<div id = 'boxRecipe'>";
-                        print "<p id = boxName>" . $data['RecipeName'] . "</p>";
-                        print "<p>". "CookTime: " . $data['CookTime'] . " minutes</p>";
-                        print "<p>". "Category of food is: " . $data['CategoryFood'] . "</p>";
-                        print "<p>". "Serving Size: " . $data['ServingSize'] . "</p><br>";
+                        print "<h3 id = boxName>" . $data1[0]['RecipeName'] . "</h3><br>";
+                        print "<p>". "CookTime: " . $data1[0]['CookTime'] . " minutes</p>";
+                        print "<p>". "Category of food is: " . $data1[0]['CategoryFood'] . "</p>";
+                        print "<p>". "Serving Size: " . $data1[0]['ServingSize'] . "</p>";
+                        print "<p>". "Vegan: " . $data1[0]['Vegan'] . "</p><br>";
+
+                        print "<h3>Ingredients</h3>";
+                        for($i=0;$i<$rows2;$i++){
+                            print "<p>". $data2[$i]['quantity'] . " " . $data2[$i]['ingredients'] . "</p>";
+                        }
+                        print "<br>";
+                        print "<h3>Steps</h3>";
+                        for($i=0;$i<$rows;$i++){
+                            print "<p>". $data1[$i]['recipestep'] . "</p><br>";
+                        }
                         print "</div>";
                     } else {print "<h1>ERROR</h1>";}
                 ?>

@@ -249,6 +249,7 @@ input{
     text-align: left;
     font-size: 20px;
     font-family: 'Roboto Condensed', sans-serif;
+
 }
 .welcome{
     text-align: left;
@@ -279,8 +280,12 @@ input{
 .searchpics{
     position: relative;
 }
-
-
+.bgbody {
+    background:url('pics/backgroundfull.jpeg');background-size:cover;
+    background-attachment: fixed;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+}
 
 #parent{
     display: grid;
@@ -297,6 +302,8 @@ input{
     vertical-align: middle;
     margin: 20px;
     padding: 10px;
+    background-color: aliceblue;
+    border-radius: 10px;
 }
 
 #objectinfo{

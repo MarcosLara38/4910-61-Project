@@ -35,8 +35,9 @@
     ?>
     </div>
 
-<img class= "boardpic" src="pics/6.jpeg">    
+  
 <div class = "bodydiv">
+    <img class= "boardpic" src="pics/6.jpeg">  
     <img src="pics/logo.png">  
     <img class="eggbowlpic" src="pics/1.jpeg">
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>

@@ -82,13 +82,6 @@
 
     if(isset($_POST['selection'])) {
         $_SESSION['selectedRecipeID'] = (int) $_POST['selectedID'];
-        // $stmt2 = $conn->prepare("SELECT * FROM recipes WHERE recipeid = $testVar");
-    //     $stmt2->execute();
-    //     $output2 = $stmt2->get_result();
-    //     $selection = $output2->fetch_all(MYSQLI_ASSOC);
-    //     if($selection != null){
-    //         var_dump($selection);
-    //     }
         header("Location: recipeparse.php");
     }
 
