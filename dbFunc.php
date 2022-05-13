@@ -61,10 +61,6 @@
             $ingdata = $output->fetch_all(MYSQLI_ASSOC);
             $rows = count($ingdata);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a403a3080402e38f45fa2a9051073861a330f8c0
             if($ingdata == null){
                 $string = implode('|', $ings);
                 //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid FROM ingredients WHERE ingredients in ($string) group by recipeid having count(distinct ingredients) = $count)";
@@ -74,13 +70,6 @@
                 $output = $stmt->get_result();
                 $ingdata = $output->fetch_all(MYSQLI_ASSOC);
                 $rows = count($ingdata);
-<<<<<<< HEAD
-                //print_r($ingdata);
-
-            }
-
-        }       
-=======
             }
 
 
@@ -88,7 +77,6 @@
     }
             
 
->>>>>>> a403a3080402e38f45fa2a9051073861a330f8c0
 
     if(isset($_POST['selection'])) {
         $_SESSION['selectedRecipeID'] = (int) $_POST['selectedID'];
