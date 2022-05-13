@@ -187,30 +187,30 @@ error_reporting(1);
 
 
    
-    echo "Recipe Name: $recipe_name<br>";
-    echo "Category of food: $selected<br>";
-    echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
-    echo "Serving Size Drop down: $drop_value <br>";
-    echo  "Is it vegan? $veganans<br>";
-    echo $ingredients_list;
-    echo $quantities_list;
+    // echo "Recipe Name: $recipe_name<br>";
+    // echo "Category of food: $selected<br>";
+    // echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
+    // echo "Serving Size Drop down: $drop_value <br>";
+    // echo  "Is it vegan? $veganans<br>";
+    // echo $ingredients_list;
+    // echo $quantities_list;
 
     //insert to recipe table
     // get recipe_id back
 
 
 
-    echo "<br>";
-    echo "<br>";    
+    // echo "<br>";
+    // echo "<br>";    
     
      
-    echo "Recipe Name: $recname_valid <br>";
-    echo "Category: $cat_valid<br>";
-    echo "Cooktime: $cooktimedrop_valid<br>";
-    echo "Serving Size: $servesizedrop_valid<br>";
-    echo "Vegan bool: $veganboolradio_valid<br>";
-    echo "ingredients: $addingredients_valid <br>";
-    echo "Steps: $addsteps_valid<br>";
+    // echo "Recipe Name: $recname_valid <br>";
+    // echo "Category: $cat_valid<br>";
+    // echo "Cooktime: $cooktimedrop_valid<br>";
+    // echo "Serving Size: $servesizedrop_valid<br>";
+    // echo "Vegan bool: $veganboolradio_valid<br>";
+    // echo "ingredients: $addingredients_valid <br>";
+    // echo "Steps: $addsteps_valid<br>";
 
 
 
