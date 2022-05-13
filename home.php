@@ -54,27 +54,31 @@ HTML;
                     <a href = "favorites.php">Favorites</a>
                     -->
                 </div>
-
             </form>
+
+                <div style="margin: 25px;">
+                    <?php
+                        if($_POST['sub_ing'] != null){
+                            if($ingdata != null){
+                                print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
+                                for($i=0;$i<$rows;$i++){
+                                    print "<form id = 'boxRecipe' method='post'>";
+                                    print "<input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Select' name='selection'>";
+                                    print "<p>" . $ingdata[$i]['RecipeName'] . "</p>";
+                                    print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
+                                    print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
+                                    print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p>";
+                                    print "</form><br>";
+                                }
+                            } 
+                            // else {print "<h1>No Results found for $string </h1>";}
+                        }
+                    ?>
+                </div>
+
+            
                 
-            <div style="margin-top: 100px;">
-                <?php
-                    if($_POST['sub_ing'] != null){
-                        if($ingdata != null){
-                            print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
-                            for($i=0;$i<$rows;$i++){
-                                print "<div id = boxRecipe>";
-                                print "<p>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
-                                print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
-                                print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
-                                print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
-                                print "</div>";
-                            }
-                        } 
-                        // else {print "<h1>No Results found for $string </h1>";}
-                    }
-                ?>
-            </div>
+            
             
         </div>
     </div>

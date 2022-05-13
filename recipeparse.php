@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <?php 
     require_once "connect.php";
-    require_once "dbFunc.php";
+
+    $stmt = $conn->prepare("SELECT * FROM recipes WHERE recipeid = ?");
+
+    $stmt->bind_param("i", $_SESSION['selectedRecipeID']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 1) {
+        $data = $result->fetch_assoc();
+        var_dump($data);
+        // header("Location: home.php");
+    }
+    $result->free();
+
 ?> 
 
 
@@ -34,44 +46,16 @@ HTML;
     <div>
         <div class = "body">
 
-            <form method="POST" id = "searchform">
-        
-
-                <div id="list-container">
-                    <ul id = "ingredient_list">
-
-                    </ul>
-                </div>
-
-                <div class = "additem">
-                    <?php echo "$ing_search_err <br>"?>
-                    <!--<input id ="addingi" type = "text" placeholder="Add ingredient...">
-                    <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
-                    <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
-                    <input class = "sub_ing" type = "submit" name = "sub_ing" value = "Search"><br>
-                    
-                    <button type = "button" class = "search" onclick = "get_list_items();">Search</button> 
-                    <a href = "favorites.php">Favorites</a>
-                    -->
-                </div>
-
-            </form>
-                
-            <div style="margin-top: 100px;">
+            <div style="margin:25px;">
                 <?php
-                    if($_POST['sub_ing'] != null){
-                        if($ingdata != null){
-                            print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
-                            for($i=0;$i<$rows;$i++){
-                                print "<div id = boxRecipe>";
-                                print "<p id = boxName>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
-                                print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
-                                print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
-                                print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
-                                print "</div>";
-                            }
-                        } else {print "<h1>No Results found for $string </h1>";}
-                    }
+                    if($data != null){
+                        print "<div id = 'boxRecipe'>";
+                        print "<p id = boxName>" . $data['RecipeName'] . "</p>";
+                        print "<p>". "CookTime: " . $data['CookTime'] . " minutes</p>";
+                        print "<p>". "Category of food is: " . $data['CategoryFood'] . "</p>";
+                        print "<p>". "Serving Size: " . $data['ServingSize'] . "</p><br>";
+                        print "</div>";
+                    } else {print "<h1>ERROR</h1>";}
                 ?>
             </div>
             

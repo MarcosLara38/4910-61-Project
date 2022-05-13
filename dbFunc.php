@@ -1,5 +1,7 @@
 <?php
 
+    $postCount = count($_POST);
+
     if(isset($_POST['searchBtn']) && $_POST['searchQuery'] != null){
        
         $recipeName = $_POST['searchQuery'];
@@ -25,7 +27,7 @@
             for($i = 0; $i < $count; $i++){
                 $ings[$i] = $_POST['ing_search'][$i];
             }
-                $string = implode("', '", $ings);
+            $string = implode("', '", $ings);
             $string = "'" . $string . "'"; 
 
             // print "They entred: $string <br>"; 
@@ -60,7 +62,6 @@
 
             if($ingdata == null){
                 $string = implode('|', $ings);
-                print "rows: $rows, String: $string";
                 //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid FROM ingredients WHERE ingredients in ($string) group by recipeid having count(distinct ingredients) = $count)";
                 $stmt = $conn->prepare("SELECT DISTINCT recipes.* FROM ingredients LEFT JOIN recipes using(recipeid) WHERE ingredients REGEXP ?");
                 $stmt->bind_param("s", $string);
@@ -68,35 +69,36 @@
                 $output = $stmt->get_result();
                 $ingdata = $output->fetch_all(MYSQLI_ASSOC);
                 $rows = count($ingdata);
-                print_r($ingdata);
-
             }
 
         }
-
             
-
-
-
-
-
-            
-            //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid  FROM ingredients   WHERE ingredients in ('egg', 'bacon')   group by recipeid   having count(distinct ingredients) = 2)";
-
-            // querry for logged in users
-            // "SELECT DISTINCT recipes.*, favorites.* FROM ingredients LEFT JOIN recipes using(recipeid) LEFT JOIN favorites using(recipeid) WHERE ingredients REGEXP ?"
-            /*$stmt = $conn->prepare("SELECT DISTINCT recipes.* FROM ingredients LEFT JOIN recipes using(recipeid) WHERE ingredients REGEXP ?");
-            $stmt->bind_param("s", $string);
-            $stmt->execute();
-            $output = $stmt->get_result();
-            $ingdata = $output->fetch_all(MYSQLI_ASSOC);
-            $rows = count($ingdata);
-            */
     }
 
 
-    
+    if(isset($_POST['selection'])) {
+        $_SESSION['selectedRecipeID'] = (int) $_POST['selectedID'];
+        // $stmt2 = $conn->prepare("SELECT * FROM recipes WHERE recipeid = $testVar");
+    //     $stmt2->execute();
+    //     $output2 = $stmt2->get_result();
+    //     $selection = $output2->fetch_all(MYSQLI_ASSOC);
+    //     if($selection != null){
+    //         var_dump($selection);
+    //     }
+        header("Location: recipeparse.php");
+    }
 
+    
+    //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid  FROM ingredients   WHERE ingredients in ('egg', 'bacon')   group by recipeid   having count(distinct ingredients) = 2)";
+    // querry for logged in users
+    // "SELECT DISTINCT recipes.*, favorites.* FROM ingredients LEFT JOIN recipes using(recipeid) LEFT JOIN favorites using(recipeid) WHERE ingredients REGEXP ?"
+    /*$stmt = $conn->prepare("SELECT DISTINCT recipes.* FROM ingredients LEFT JOIN recipes using(recipeid) WHERE ingredients REGEXP ?");
+    $stmt->bind_param("s", $string);
+    $stmt->execute();
+    $output = $stmt->get_result();
+    $ingdata = $output->fetch_all(MYSQLI_ASSOC);
+    $rows = count($ingdata);
+    */
 ?>
 
 <!--
