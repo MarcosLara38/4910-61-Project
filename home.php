@@ -80,19 +80,23 @@ HTML;
                 </div>
             </form>
 
-                <div style="margin: 25px;">
+                <div class = "outbody"  style="margin: 25px;">
                     <?php
                         if($_POST['sub_ing'] != null){
                             if($ingdata != null){
                                 print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
+                                print "<br>";
                                 for($i=0;$i<$rows;$i++){
-                                    print "<form id = 'boxRecipe' method='post'>";
+                                    print "<div id = 'boxRecipe' >";
+                                    print "<form method='post'>";
                                     print "<input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Select' name='selection'>";
                                     print "<p>" . $ingdata[$i]['RecipeName'] . "</p>";
                                     print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
                                     print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
                                     print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p>";
-                                    print "</form><br>";
+                                    print "</form>";
+                                    print "</div>";
+                                    
                                 }
                             } 
                             // else {print "<h1>No Results found for $string </h1>";}

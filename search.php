@@ -33,7 +33,9 @@
 
             </ul>
 
+            
             <div class = "searchdiv">
+                <h2>Please search a recipe name with a keyword</h2>
                 <form method="post">
                     <input type = "text" class = "searchinput" name="searchQuery" placeholder="Search by recipe name..." value="">
                     <input type = "submit" name="searchBtn" value="Search" class = "searchbtn">

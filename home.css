@@ -277,6 +277,18 @@ input{
     padding: 10px;
 }
 
+
+
+.outbody{
+    padding-top: 50px;
+    /* display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 100px;*/
+} 
+
 .del{
     padding-left: 10px;
 }
