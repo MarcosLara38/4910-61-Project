@@ -90,7 +90,10 @@ HTML;
                         }
                         print "</div>";
                     } if ($data1 == null && $favoritesend == false && isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {print "<h1>OOPS SOMETHING WENT WRONG</h1>";}
-                    if ($favoritesend == true) {print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1>";}
+                    if ($favoritesend == true){
+                            print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1>";
+                            
+                        }
                 ?>
             </div>
             

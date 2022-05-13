@@ -64,6 +64,7 @@ if (isset($_POST['submit'])){
     if($pwordvalid && $confirmedpword){
         if(strcmp($pword,$confirmedpword) == 0){
             $validpassword = true;
+            $hashed = password_hash($pword, PASSWORD_DEFAULT);
             echo "Both passwords are the same and is valid, thank you!<br>";
         } else{
             $validpassword = false;
@@ -77,7 +78,7 @@ if (isset($_POST['submit'])){
 
             $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (?, ?, ?, ?)");
             
-            $stmt->bind_param("ssss", $fname, $lname, $email, $pword);
+            $stmt->bind_param("ssss", $fname, $lname, $email, $hashed);
         if ($stmt->execute()) {
             
             $_SESSION['logged_in'] = true;

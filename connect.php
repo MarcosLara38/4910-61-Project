@@ -1,14 +1,15 @@
 <?php
     session_start();
 
-    if(isset($_SESSION)){
-       var_dump($_SESSION);
-    }
+    // if(isset($_SESSION)){
+    //    var_dump($_SESSION);
+    // }
 
     $host = 'localhost';
     $user = 'orodriguez';
     $dbpassword = 'Zegh86Gupm';
     $database = 'orodriguez';
+    $salt = "pepper";
     
     $conn = new mysqli($host, $user, $dbpassword, $database);
     

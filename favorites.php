@@ -1,5 +1,19 @@
-
 <!DOCTYPE html>
+
+<?php
+    $stmtrun = false;
+    require_once "connect.php";
+    $stmt = $conn->prepare("SELECT * FROM favorites INNER JOIN recipes ON recipes.recipeid = favorites.recipeid AND userid = ?");
+    $stmt->bind_param("i", $_SESSION['userid']);
+    if($stmt->execute()){
+        $result = $stmt->get_result();
+        $favRecipes = $result->fetch_all(MYSQLI_ASSOC);
+        $rows = count($favRecipes);
+        $stmtrun = true;
+    }
+    
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +34,7 @@
 <body class="bgbody" >
     <div class = "nav">
     <?php 
-        require_once "connect.php";
+        
         require "nav.php";
     ?>
     </div>
@@ -33,10 +47,24 @@
 HTML;
 			endif; ?>
     <div>
-        <div class = "body">
-            
-
-
+        <div class = "outbody">
+            <?php
+                if($stmtrun){
+                    if($favRecipes != null){
+                        print "<h3>We Found $rows Recipes in your Favorites List:</h3>";
+                        print "<br>";
+                        for($i=0;$i<$rows;$i++){
+                            print "<div id = 'boxRecipe' >";
+                            print "<h3>" . $favRecipes[$i]['RecipeName'] . "</h3>";
+                            print "<p>". "CookTime: " . $favRecipes[$i]['CookTime'] . " minutes</p>";
+                            print "<p>". "Category of food is: " . $favRecipes[$i]['CategoryFood'] . "</p>";
+                            print "<p>". "Serving Size: " . $favRecipes[$i]['ServingSize'] . "</p>";
+                            print "<form method='post'><input type='hidden' name='selectedID' value='". $favRecipes[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
+                            print "</div>";
+                        }
+                    } 
+                }
+            ?>
         </div>
     </div>
 </body>

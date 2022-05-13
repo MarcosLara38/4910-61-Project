@@ -27,18 +27,21 @@
         if (isset($_POST) && !empty($_POST)) {
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
-            //$hashed = password_hash($password, PASSWORD_DEFAULT);
-            
-            $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
-            $stmt->bind_param("ss", $email, $password);
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
             $stmt->execute();
             $result = $stmt->get_result();
-            if ($result->num_rows == 1) {
+            // echo mysql_errno($conn) . ": " . mysql_error($conn) . "\n";
+            if ($result) {
                 $data = $result->fetch_assoc();
-                $_SESSION['logged_in'] = true;
-                $_SESSION['userid'] = $data['id'];
-                $_SESSION['name'] = $data['fname'];
-                header("Location: home.php");
+                if (password_verify($password, $data['password'])){
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['userid'] = $data['id'];
+                    $_SESSION['name'] = $data['fname'];
+                    header("Location: home.php");
+                } else {
+                    $loginerror = true;
+                }
             }
             $result->free();
         }
@@ -56,12 +59,17 @@
         Password: <input class = "signin_pass" type = "password" name = "password"/>
         <br>
         <input class = "signin_btn" type = "submit" value="login"/>
-        <p>Don't have an account? <a id='signinbtn' href="signup.php">Sign up</p>
+        <p>Don't have an account? <a id='signinbtn' href="signup.php">Sign up</a></p>
         </form>
         </div>
     <?php } else{ ?>
         <h1>You are logged in</h1>
-    <?php } ?>
+    <?php }
+        if($loginerror){
+            echo "<h1>ERROR LOGGING IN</h1><br>";
+            echo "<h1>PLEASE TRY AGAIN</h1>";
+        }
+    ?>
     </div>
 
 </body>
