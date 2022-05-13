@@ -23,7 +23,9 @@
     ?>
     </div>
 
-    <img src="pics/logo.png">   
+    <img src="pics/4.jpeg">
+    <img src="pics/5.jpeg">
+    <img src="pics/3.jpeg">   
     <h1></h1>
     <div>
         <div class = "body">
@@ -41,9 +43,16 @@
                 <?php
                     if(isset($_POST['searchBtn'])){
                         if($data != null){
-                            print "<h1>Found $rows Recipes</h1>";
+                            print "<h1> Based on the search these are the recipes we found </h1>";
+                            print "<h1>Found $rows Recipes</h1><br>";
                             for($i=0;$i<$rows;$i++){
-                                print "<p>". $data[$i][1] ."</p><br>";
+                                print "<div id = boxRecipe>";
+                                print "<p>". $data[$i]['recipeid'] . " <a href = recipeparse.php > " . $data[$i]['RecipeName'] . "</a></p>";
+                                print "<p>". "CookTime: " . $data[$i]['CookTime'] . " minutes</p>";
+                                print "<p>". "Category of food is: " . $data[$i]['CategoryFood'] . "</p>";
+                                print "<p>". "Serving Size: " . $data[$i]['ServingSize'] . "</p><br>";
+                                
+                                print "</div>";
                             }
                         } else {print "<h1>No Results found for $RecipeName </h1>";}
                     }

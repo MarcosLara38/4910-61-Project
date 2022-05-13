@@ -12,9 +12,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="home.css">
     <script src="final.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Foodify</title>
+    <style>
+        .bgbody {
+            background:url('pics/backgroundfull.jpeg');background-size:cover;
+            background-attachment: fixed;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+        }
+        </style>
 </head>
-<body >
+<body class="bgbody"  style="">
+    
     <div class = "nav">
     <?php 
         
@@ -22,17 +35,26 @@
     ?>
     </div>
 
-    <img src="pics/logo.png"><br><br><br>  
+<img class= "boardpic" src="pics/6.jpeg">    
+<div class = "bodydiv">
+    <img src="pics/logo.png">  
+    <img class="eggbowlpic" src="pics/1.jpeg">
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
 			<h1>Welcome, Guest</h1>
 			
 		<?php else: 
 			print <<<HTML
-			<h1>Welcome, {$_SESSION['name']}!</h1>
+			<h1 class = "welcome">Welcome, {$_SESSION['name']}!</h1>
 HTML;
 			endif; ?>
+            <p class = "intro_text"> Welcome to Foodify! Where we are taking part in reducing the waste of food. 
+        We know our lives can get hectic and forget about about what we have in our disposal to make. 
+        Instead of wasting money on gas and the unhealthy fast food that is out there lets see what you have 
+        in your pantry and lets get cooking! </p>
+    
     <div>
         <div class = "body">
+            
 
             <form method="POST" id = "searchform">
         
@@ -42,6 +64,8 @@ HTML;
 
                     </ul>
                 </div>
+                
+
 
                 <div class = "additem">
                     <?php echo "$ing_search_err <br>"?>
@@ -62,17 +86,18 @@ HTML;
                     if($_POST['sub_ing'] != null){
                         if($ingdata != null){
                             print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
+                            echo "<div id = parent>";
                             for($i=0;$i<$rows;$i++){
-                                 echo "<div id = parent>";
+                                 
                                     print "<div id = boxRecipe>";
                                     print "<p>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
                                     print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
                                     print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
                                     print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
                                     print "</div>";
-                                echo "<div>";
+                                
                             }
-                        } 
+                        } echo "<div>";
                         // else {print "<h1>No Results found for $string </h1>";}
                     }
                 ?>
@@ -80,6 +105,8 @@ HTML;
             
         </div>
     </div>
+                </div>
 
 </body>
+
 </html>
