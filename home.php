@@ -48,7 +48,7 @@ HTML;
                     <input id ="addingi" type = "text" placeholder="Add ingredient...">
                     <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
                     <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
-                    <input class = "sub_ing" type = "submit" name = "sub_ing" value = "Search"><br>
+                    <input class = "clearbtn" type = "submit" name = "sub_ing" value = "Search"><br>
                     
                     <!--<button type = "button" class = "search" onclick = "get_list_items();">Search</button> 
                     <a href = "favorites.php">Favorites</a>
@@ -70,7 +70,8 @@ HTML;
                                 print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
                                 print "</div>";
                             }
-                        } else {print "<h1>No Results found for $string </h1>";}
+                        } 
+                        // else {print "<h1>No Results found for $string </h1>";}
                     }
                 ?>
             </div>
