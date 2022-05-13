@@ -143,9 +143,16 @@ function cleaninput($data){
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="home.css">
-
+  <style>
+        .bgbody {
+            background:url('pics/backgroundfull.jpeg');background-size:cover;
+            background-attachment: fixed;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+        }
+        </style>
 </head>
-<body>
+<body class="bgbody" >
   <?php require "nav.php"; ?>
   <div>
     <img src="pics/logo.png"> 

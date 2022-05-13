@@ -9,8 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="home.css">
-
-<body style= text-align:center>
+    <style>
+        .bgbody {
+            background:url('pics/backgroundfull.jpeg');background-size:cover;
+            background-attachment: fixed;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+        }
+        </style>
+</head>
+<body class="bgbody"  style= text-align:center>
     <div class = "nav">
     <?php
         //uncomment when finished setting up connect.php database side
