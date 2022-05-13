@@ -26,12 +26,10 @@
     </div>
 
     <img src="pics/logo.png"><br><br><br>  
-    <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
-			<h1>Welcome, Guest</h1>
-			
+    <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): header("Location: signin.php");?>	
 		<?php else: 
 			print <<<HTML
-			<h1>Welcome, {$_SESSION['name']}!</h1>
+			<h2>Welcome, {$_SESSION['name']}!</h2>
 HTML;
 			endif; ?>
     <div>

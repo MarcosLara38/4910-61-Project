@@ -12,7 +12,6 @@
         $output = $stmt->get_result();
         $data = $output->fetch_all(MYSQLI_ASSOC);
         $rows = count($data);
-        var_dump($data);
     }
 
 //          HOME SEARCH
@@ -84,6 +83,9 @@
         $_SESSION['selectedRecipeID'] = (int) $_POST['selectedID'];
         header("Location: recipeparse.php");
     }
+
+
+
 
     
     //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid  FROM ingredients   WHERE ingredients in ('egg', 'bacon')   group by recipeid   having count(distinct ingredients) = 2)";

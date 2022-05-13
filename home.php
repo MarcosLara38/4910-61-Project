@@ -41,11 +41,10 @@
     <img src="pics/logo.png">  
     <img class="eggbowlpic" src="pics/1.jpeg">
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
-			<h1>Welcome, Guest</h1>
-			
+        <br><br>
 		<?php else: 
 			print <<<HTML
-			<h1 class = "welcome">Welcome, {$_SESSION['name']}!</h1>
+			<h2 class = "welcome">Welcome, {$_SESSION['name']}!</h2>
 HTML;
 			endif; ?>
             <p class = "intro_text"> Welcome to Foodify! Where we are taking part in reducing the waste of food. 
@@ -89,13 +88,11 @@ HTML;
                                 print "<br>";
                                 for($i=0;$i<$rows;$i++){
                                     print "<div id = 'boxRecipe' >";
-                                    print "<form method='post'>";
-                                    print "<input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Select' name='selection'>";
-                                    print "<p>" . $ingdata[$i]['RecipeName'] . "</p>";
+                                    print "<h3>" . $ingdata[$i]['RecipeName'] . "</h3>";
                                     print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
                                     print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
                                     print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p>";
-                                    print "</form>";
+                                    print "<form method='post'><input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
                                     print "</div>";
                                     
                                 }

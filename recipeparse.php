@@ -2,6 +2,7 @@
 <?php 
     require_once "connect.php";
     require_once "dbFunc.php";
+    $favoritesend = false;
 
     $stmt = $conn->prepare("SELECT DISTINCT * FROM recipes INNER JOIN steps ON steps.recipeid = recipes.recipeid WHERE recipes.recipeid = ?");
     $stmt->bind_param("i", $_SESSION['selectedRecipeID']);
@@ -23,6 +24,13 @@
         $rows2 = count($data2);
     }
 
+    if(isset($_POST['favoriteSelection']) && isset($_SESSION['logged_in'])) {
+        $stmt3 = $conn->prepare("INSERT INTO favorites (userid, recipeid ) VALUES (?, ?)");
+        $stmt3->bind_param("ii", $_SESSION['userid'], $_SESSION['selectedRecipeID']);
+        if ($stmt3->execute()){
+            $favoritesend = true;
+        }
+    }
 ?> 
 
 
@@ -45,11 +53,13 @@
 
     <img src="pics/logo.png"><br><br><br>  
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
-			<h1>Welcome, Guest</h1>
+			<h2>Welcome, Guest You Are Not Logged In</h2>
+            <br>
+            <h4> Please sign in to add this recipe to your favorites </h4> 
 			
 		<?php else: 
 			print <<<HTML
-			<h1>Welcome, {$_SESSION['name']}!</h1>
+			<h2>Welcome, {$_SESSION['name']}!</h2>
 HTML;
 			endif; ?>
     <div>
@@ -57,9 +67,13 @@ HTML;
             
             <div style="margin:25px;">
                 <?php
-                    if($data1 != null && $data2 != null){
+                    if($data1 != null && $data2 != null && $favoritesend == false){
                         print "<div id = 'boxRecipe'>";
-                        print "<h3 id = boxName>" . $data1[0]['RecipeName'] . "</h3><br>";
+                        print "<h3 id = boxName>" . $data1[0]['RecipeName'] . "</h3>";
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                            print "<form method='post'>";
+                            print "<input class='clearbtn' type='submit' value='Add to Favorites' name='favoriteSelection'></form><br>";
+                        }
                         print "<p>". "CookTime: " . $data1[0]['CookTime'] . " minutes</p>";
                         print "<p>". "Category of food is: " . $data1[0]['CategoryFood'] . "</p>";
                         print "<p>". "Serving Size: " . $data1[0]['ServingSize'] . "</p>";
@@ -75,7 +89,8 @@ HTML;
                             print "<p>". $data1[$i]['recipestep'] . "</p><br>";
                         }
                         print "</div>";
-                    } else {print "<h1>ERROR</h1>";}
+                    } if ($data1 == null && $favoritesend == false && isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {print "<h1>OOPS SOMETHING WENT WRONG</h1>";}
+                    if ($favoritesend == true) {print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1>";}
                 ?>
             </div>
             
