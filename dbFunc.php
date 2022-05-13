@@ -64,7 +64,7 @@
                 $rows = count($ingdata);
 
                 if($ingdata == null){
-                    
+
                 }
 
                 
@@ -221,7 +221,7 @@
 
 
             }else{
-                echo "erro";
+                echo "error";
 
             }
 

@@ -34,28 +34,7 @@ HTML;
     <div>
         <div class = "body">
 
-            <form method="POST" id = "searchform">
-        
 
-                <div id="list-container">
-                    <ul id = "ingredient_list">
-
-                    </ul>
-                </div>
-
-                <div class = "additem">
-                    <?php echo "$ing_search_err <br>"?>
-                    <!--<input id ="addingi" type = "text" placeholder="Add ingredient...">
-                    <button type = "button" class = "addbtn" onclick="addingredient();">Add ingredient</button>
-                    <button type = "button" class = "clearbtn" onclick = "clearlist()">Clear ingredient list</button>
-                    <input class = "sub_ing" type = "submit" name = "sub_ing" value = "Search"><br>
-                    
-                    <button type = "button" class = "search" onclick = "get_list_items();">Search</button> 
-                    <a href = "favorites.php">Favorites</a>
-                    -->
-                </div>
-
-            </form>
                 
             <div style="margin-top: 100px;">
                 <?php
@@ -63,7 +42,7 @@ HTML;
                         if($ingdata != null){
                             print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
                             for($i=0;$i<$rows;$i++){
-                                print "<div id = boxRecipe>";
+                                print "<div id = singlerecipe>";
                                 print "<p id = boxName>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
                                 print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
                                 print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";

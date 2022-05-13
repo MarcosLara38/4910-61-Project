@@ -63,12 +63,14 @@ HTML;
                         if($ingdata != null){
                             print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
                             for($i=0;$i<$rows;$i++){
-                                print "<div id = boxRecipe>";
-                                print "<p>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
-                                print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
-                                print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
-                                print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
-                                print "</div>";
+                                 echo "<div id = parent>";
+                                    print "<div id = boxRecipe>";
+                                    print "<p>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
+                                    print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
+                                    print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
+                                    print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
+                                    print "</div>";
+                                echo "<div>";
                             }
                         } else {print "<h1>No Results found for $string </h1>";}
                     }
