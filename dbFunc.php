@@ -61,7 +61,7 @@
             $ingdata = $output->fetch_all(MYSQLI_ASSOC);
             $rows = count($ingdata);
 
-<<<<<<< HEAD
+<<<<<<< ::HEAD
 
 =======
 >>>>>>> a403a3080402e38f45fa2a9051073861a330f8c0
