@@ -79,30 +79,6 @@ HTML;
                     -->
                 </div>
             </form>
-<<<<<<< HEAD
-                
-            <div style="margin-top: 100px;">
-                <?php
-                    if($_POST['sub_ing'] != null){
-                        if($ingdata != null){
-                            print "<h1>We Found $rows Recipes that have the ingredients included</h1>";
-                            echo "<div id = parent>";
-                            for($i=0;$i<$rows;$i++){
-                                 
-                                    print "<div id = boxRecipe>";
-                                    print "<p>". $ingdata[$i]['recipeid'] . " <a href = recipeparse.php > " . $ingdata[$i]['RecipeName'] . "</a></p>";
-                                    print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
-                                    print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
-                                    print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p><br>";
-                                    print "</div>";
-                                
-                            }
-                        } echo "<div>";
-                        // else {print "<h1>No Results found for $string </h1>";}
-                    }
-                ?>
-            </div>
-=======
 
                 <div style="margin: 25px;">
                     <?php
@@ -123,7 +99,6 @@ HTML;
                         }
                     ?>
                 </div>
->>>>>>> a403a3080402e38f45fa2a9051073861a330f8c0
             
         </div>
     </div>
