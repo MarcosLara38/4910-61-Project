@@ -26,6 +26,8 @@
             }
             $string = implode('|', $ings);
             print $string;
+            // querry for logged in users
+            // "SELECT DISTINCT recipes.*, favorites.* FROM ingredients LEFT JOIN recipes using(recipeid) LEFT JOIN favorites using(recipeid) WHERE ingredients REGEXP ?"
             $stmt = $conn->prepare("SELECT DISTINCT recipes.* FROM ingredients LEFT JOIN recipes using(recipeid) WHERE ingredients REGEXP ?");
             $stmt->bind_param("s", $string);
             $stmt->execute();
