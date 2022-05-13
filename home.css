@@ -257,6 +257,9 @@ input{
     float: left;
     padding-left: 50px;
 }
+.searchpics{
+    position: relative;
+}
 
 
 
@@ -275,6 +278,10 @@ input{
     vertical-align: middle;
     margin: 20px;
     padding: 10px;
+}
+
+#objectinfo{
+    padding-bottom: 70px;
 }
 
 

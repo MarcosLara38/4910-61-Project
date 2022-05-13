@@ -15,17 +15,31 @@
     <script src="final.js"></script>
     <script src="upload.js"></script>
     <title>Search</title>
+    <style>
+    .bgbody {
+        background:url('pics/backgroundfull.jpeg');background-size:cover;
+        background-attachment: fixed;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+    }
+    </style>
+    
 </head>
-<body>
+<body class = "bgbody">
+
     <div class = "nav">
     <?php 
         require "nav.php";
     ?>
     </div>
 
-    <img src="pics/4.jpeg">
-    <img src="pics/5.jpeg">
-    <img src="pics/3.jpeg">   
+   
+
+
+
+    <img class = "searchpics" src="pics/4.jpeg">
+    <img class = "searchpics" src="pics/5.jpeg">
+    <img class = "searchpics" src="pics/3.jpeg">   
     <h1></h1>
     <div>
         <div class = "body">
