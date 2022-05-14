@@ -91,11 +91,15 @@ HTML;
                         print "</div>";
                     } if ($data1 == null && $favoritesend == false && isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {print "<h1>OOPS SOMETHING WENT WRONG</h1>";}
                     if ($favoritesend == true){
-                            print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1>";
-                            print "<form method='post'><input class='clearbtn' type='submit' value='To Home' name='backToHome'></form>";
-                            print "<form method='post'><input class='clearbtn' type='submit' value='To Search Page' name='backToSearch'></form><br>";
+                            print "<h1>SUCCESS ADDDING FAVORITE RECIPE</h1><br>";
+                            print "<h3><a href='home.php'>Return to the Homepage</a></h3>
+                            <br>
+                            <h3><a href='search.php'>Search for another recipe</a></h3>
+                            <br>
+                            <h3><a href='favorites.php'>Go to favorites</a></h3>";
                         }
                 ?>
+                
             </div>
             
         </div>

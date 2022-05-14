@@ -321,15 +321,16 @@ input{
 } 
 
 .del{
-    margin-left: 10px;
+    margin: 10px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 4px;
-
-    
+    padding: 5px;
 }
 input #addDatabtn{
     padding-bottom: 30px;
 }
 .new_ing{
     font-size: 25px;
+    margin-bottom: 10px;
+    padding: 10px;
 }
