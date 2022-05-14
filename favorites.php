@@ -3,6 +3,7 @@
 <?php
     $stmtrun = false;
     require_once "connect.php";
+
     $stmt = $conn->prepare("SELECT DISTINCT * FROM recipes INNER JOIN favorites ON recipes.recipeid = favorites.recipeid AND userid = ? GROUP by recipes.recipeid");
     $stmt->bind_param("i", $_SESSION['userid']);
     if($stmt->execute()){
@@ -11,6 +12,12 @@
         $rows = count($favRecipes);
         $stmtrun = true;
     }
+
+    if(isset($_POST['openRecipe'])) {
+        $_SESSION['selectedRecipeID'] = (int) $_POST['selectedID'];
+        header("Location: recipeparse.php");
+    }
+
     
 ?>
 
@@ -59,7 +66,7 @@ HTML;
                             print "<p>". "CookTime: " . $favRecipes[$i]['CookTime'] . " minutes</p>";
                             print "<p>". "Category of food is: " . $favRecipes[$i]['CategoryFood'] . "</p>";
                             print "<p>". "Serving Size: " . $favRecipes[$i]['ServingSize'] . "</p>";
-                            print "<form method='post'><input type='hidden' name='selectedID' value='". $favRecipes[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
+                            print "<form method='post'><input type='hidden' name='selectedID' value='". $favRecipes[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='openRecipe'></form>";
                             print "</div>";
                         }
                     } 

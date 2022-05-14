@@ -62,13 +62,14 @@
                             print "<h1> Based on the search these are the recipes we found </h1>";
                             print "<h1>Found $rows Recipes</h1><br>";
                             for($i=0;$i<$rows;$i++){
-                                print "<div id = boxRecipe>";
-                                print "<p>". $data[$i]['recipeid'] . " <a href = recipeparse.php > " . $data[$i]['RecipeName'] . "</a></p>";
-                                print "<p>". "CookTime: " . $data[$i]['CookTime'] . " minutes</p>";
-                                print "<p>". "Category of food is: " . $data[$i]['CategoryFood'] . "</p>";
-                                print "<p>". "Serving Size: " . $data[$i]['ServingSize'] . "</p><br>";
-                                
-                                print "</div>";
+                                print "<div id = 'boxRecipe' >";
+                                    print "<h3>" . $data[$i]['RecipeName'] . "</h3>";
+                                    print "<p>". "CookTime: " . $data[$i]['CookTime'] . " minutes</p>";
+                                    print "<p>". "Category of food is: " . $data[$i]['CategoryFood'] . "</p>";
+                                    print "<p>". "Serving Size: " . $data[$i]['ServingSize'] . "</p>";
+                                    print "<p>". "Vegan: " . $data[$i]['Vegan'] . "</p>";
+                                    print "<form method='post'><input type='hidden' name='selectedID' value='". $data[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
+                                    print "</div>";
                             }
                         } else {print "<h1>No Results found for $RecipeName </h1>";}
                     }

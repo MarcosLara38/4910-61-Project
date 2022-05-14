@@ -5,7 +5,6 @@
     if(isset($_POST['searchBtn']) && $_POST['searchQuery'] != null){
        
         $recipeName = $_POST['searchQuery'];
-        // $recipeName = "" . $recipeName . "";
         $stmt = $conn->prepare("SELECT * FROM recipes WHERE RecipeName REGEXP ?");
         $stmt->bind_param("s", $recipeName);
         $stmt->execute();

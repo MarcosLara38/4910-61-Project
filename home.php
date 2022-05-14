@@ -92,6 +92,7 @@ HTML;
                                     print "<p>". "CookTime: " . $ingdata[$i]['CookTime'] . " minutes</p>";
                                     print "<p>". "Category of food is: " . $ingdata[$i]['CategoryFood'] . "</p>";
                                     print "<p>". "Serving Size: " . $ingdata[$i]['ServingSize'] . "</p>";
+                                    print "<p>". "Vegan: " . $ingdata[$i]['Vegan'] . "</p>";
                                     print "<form method='post'><input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
                                     print "</div>";
                                 }
