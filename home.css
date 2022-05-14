@@ -321,10 +321,10 @@ input{
 } 
 
 .del{
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 4px;
-    padding: 5px;
 }
 input #addDatabtn{
     padding-bottom: 30px;
@@ -333,4 +333,9 @@ input #addDatabtn{
     font-size: 25px;
     margin-bottom: 10px;
     padding: 10px;
+}
+
+::marker {
+    color:#cc3333;
+    font-size: 1.2em;
 }

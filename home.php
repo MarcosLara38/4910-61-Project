@@ -96,8 +96,11 @@ HTML;
                                     print "<form method='post'><input type='hidden' name='selectedID' value='". $ingdata[$i]['recipeid'] ."'><input class='clearbtn' type='submit' value='Open Recipe' name='selection'></form>";
                                     print "</div>";
                                 }
-                            } 
+                            } else if($matches == false){
+                                print "<h2>No ingredient matches for '$string'</h2>";
+                            }
                         }
+                        
                     ?>
                 </div>
             

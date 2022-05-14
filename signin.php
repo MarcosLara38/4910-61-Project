@@ -32,16 +32,18 @@
             $stmt->execute();
             $result = $stmt->get_result();
             // echo mysql_errno($conn) . ": " . mysql_error($conn) . "\n";
-            if ($result) {
-                $data = $result->fetch_assoc();
+            $data = $result->fetch_assoc();
+            if (count($data) > 0){
                 if (password_verify($password, $data['password'])){
                     $_SESSION['logged_in'] = true;
                     $_SESSION['userid'] = $data['id'];
                     $_SESSION['name'] = $data['fname'];
                     header("Location: home.php");
                 } else {
-                    $loginerror = true;
+                    $passworderror = true;
                 }
+            }else{
+                $loginerror=true;
             }
             $result->free();
         }
@@ -65,9 +67,11 @@
     <?php } else{ ?>
         <h1>You are logged in</h1>
     <?php }
-        if($loginerror){
-            echo "<h1>ERROR LOGGING IN</h1><br>";
-            echo "<h1>PLEASE TRY AGAIN</h1>";
+        if($passworderror){
+            echo "<br><h2>INCORRECT PASSWORD</h2>";
+        }
+        IF ($loginerror){
+            echo "<br><h2>Email Doesn't exist, verify your spelling.</h2>";
         }
     ?>
     </div>

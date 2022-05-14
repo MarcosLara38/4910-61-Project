@@ -20,6 +20,7 @@
         if(!$_POST['ing_search']){
             $ing_search_err = "Need ingredient(s) for search";
         }else{
+            $matches=true;
             $ing_search = implode('. ', $_POST['ing_search']);
             $ing_search_list = "Ingredient(s) to search: $ing_search <br>";
             $count = count($_POST['ing_search']);
@@ -29,8 +30,6 @@
             $string = implode("', '", $ings);
             $string = "'" . $string . "'"; 
 
-            // print "They entred: $string <br>"; 
-            // echo "Entred $count ingredient(s)";
             //$sql = "SELECT * FROM recipes WHERE recipeid IN (SELECT recipeid  FROM ingredients   WHERE ingredients in '$ings[0]' group by recipeid having count(distinct ingredients) = $count)";
 
             $sql = "Select * from recipes where recipeid in
@@ -58,6 +57,9 @@
             $output = $stmt->get_result();
             $ingdata = $output->fetch_all(MYSQLI_ASSOC);
             $rows = count($ingdata);
+            if($rows == 0){
+                $matches = false;
+            }
 
 
 
@@ -70,6 +72,9 @@
                 $output = $stmt->get_result();
                 $ingdata = $output->fetch_all(MYSQLI_ASSOC);
                 $rows = count($ingdata);
+                if($rows == 0){
+                    $matches = false;
+                }
             }
 
 

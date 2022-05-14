@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php ini_set("display_errors",1);
+$entries = false;
 error_reporting(1);
     require_once "connect.php";
     //die(print_r($_POST['ingredients'], true));
@@ -115,16 +116,11 @@ error_reporting(1);
         
             //if Entires are valid then add data to database
         if($recname_valid && $cat_valid && $cooktimedrop_valid && $servesizedrop_valid && $veganboolradio_valid && $addsteps_valid && $addingredients_valid){
-            echo "All entries are valid, preparing to enter into database<br>";
             
             $sql = "INSERT INTO recipes (RecipeName, CategoryFood, CookTime, ServingSize, Vegan)
             VALUES ('$recipe_name','$selected','$cookTimeDropValue','$drop_value','$veganans')";
 
-            if(mysqli_query($conn, $sql)){
-                echo "New records created successfully<br>";
-            }else{
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+ 
 
             $id = mysqli_insert_id($conn);
             
@@ -137,12 +133,7 @@ error_reporting(1);
                 values ($id, '$ingredient', '$quantity')";
                 //echo $sql."<br/>";
 
-                if(mysqli_query($conn, $sql)){
-                    echo "New records also created successfully into the ingredients table<br>";
-                }
-                else{
-                    echo "Error, did not enter records into ingredients table<br>";
-                }
+
             }
 
             for($i = 0 ; $i < count($_POST['steps']); $i++){
@@ -155,16 +146,12 @@ error_reporting(1);
                 values ($id, '$steps')";
                 //echo $sql."<br/>";
 
-                if(mysqli_query($conn, $sql)){
-                    echo "New records entered in steps<br>";
-                }else{
-                    echo "New records not entered in steps<br>";
-                }
+
             }
 
 
         }else{
-            echo "All entries are not valid and therefore cannot proceed, please fix issues";
+            $entries = true;
         }
 
         //recipe id back 
@@ -183,38 +170,6 @@ error_reporting(1);
         $data = ucfirst($data);
         return $data;
     }
-
-
-
-   
-    // echo "Recipe Name: $recipe_name<br>";
-    // echo "Category of food: $selected<br>";
-    // echo "Cook time Drop down: $cookTimeDropValue Mins <br> ";
-    // echo "Serving Size Drop down: $drop_value <br>";
-    // echo  "Is it vegan? $veganans<br>";
-    // echo $ingredients_list;
-    // echo $quantities_list;
-
-    //insert to recipe table
-    // get recipe_id back
-
-
-
-    // echo "<br>";
-    // echo "<br>";    
-    
-     
-    // echo "Recipe Name: $recname_valid <br>";
-    // echo "Category: $cat_valid<br>";
-    // echo "Cooktime: $cooktimedrop_valid<br>";
-    // echo "Serving Size: $servesizedrop_valid<br>";
-    // echo "Vegan bool: $veganboolradio_valid<br>";
-    // echo "ingredients: $addingredients_valid <br>";
-    // echo "Steps: $addsteps_valid<br>";
-
-
-
-    
 
     ?>
 
@@ -401,8 +356,13 @@ HTML;
                 <br>
 
                 <input class = "add_submit" type = "submit" onclick="return clicked();" name = "submit" value = "Submit">        
-                </form> 
+                </form>
 
+                <?php
+                    if($entries){
+                        echo "All entries are not valid and therefore cannot proceed, please fix issues";
+                    }
+                ?>
         </div>
     </div>
 

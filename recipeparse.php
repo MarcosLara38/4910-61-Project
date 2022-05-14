@@ -53,8 +53,7 @@
 
     <img src="pics/logo.png"><br><br><br>  
     <?php if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != true): ?>
-			<h2>Welcome Guest You Are Not Signed In</h2>
-            <br>
+			<br>
             <h4> Please sign in to add this recipe to your favorites </h4>
             <a href='signin.php'>Sign in</a>
 			
